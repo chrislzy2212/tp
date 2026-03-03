@@ -11,19 +11,41 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Christopher Lu Zi Yang
+
+<img src="images/chrislzy2212.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/chrislzy2212)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities : Testing
 
-### Jane Doe
+### Kim Siang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kimsianglim.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/kimsianglim)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities : Testing
+
+### Liew Yu Le
+
+<img src="images/liewyule.png" width="200px">
+
+[[github](https://github.com/liewyule)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Ming You 
+
+<img src="images/ming62.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
@@ -31,31 +53,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ethan Shum
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ethan-shum.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ethan-shum)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: TP Member
+* Responsibilities: Finish TP
