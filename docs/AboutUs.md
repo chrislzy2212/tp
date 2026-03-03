@@ -78,3 +78,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Ethan Shum
+
+<img src="images/ethan-shum.png" width="200px">
+
+[[github](http://github.com/ethan-shum)]
+
+* Role: TP Member
+* Responsibilities: Finish TP
