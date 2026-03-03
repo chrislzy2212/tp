@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
-  "titlePrefix": "",
-  "titleSuffix": "LockedIn",
+  "titlePrefix": "LockedIn",
+  "titleSuffix": "AddressBook Level-3",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
