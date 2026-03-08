@@ -361,6 +361,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Save data**
+
+**MSS**
+
+1.  User executes any data-modifying command (e.g. add, edit, delete).
+2.  LockedIn saves the updated data to the local JSON file automatically.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. LockedIn cannot write to the JSON file due to insufficient permissions.
+
+    * 2a1. LockedIn displays an error: `Error: Insufficient permission to save data to the current directory. Data from this session may be lost.`
+
+      Use case ends.
+
+* 2b. The disk is full and the file cannot be written.
+
+    * 2b1. LockedIn displays an error: `Error: Could not save data. Your disk might be full.`
+
+      Use case ends.
+
+* 2c. The JSON file is locked by another process.
+
+    * 2c1. LockedIn displays an error: `Error: Data file is currently in use by another program. Please close it to allow saving.`
+
+      Use case ends.
+
+* 2d. The JSON file or its directory does not exist.
+
+    * 2d1. LockedIn automatically creates the directory and a new JSON file populated with default data.
+
+      Use case ends.
+
+**Use case: Exit the application**
+
+**MSS**
+
+1.  User enters `quit` or `q`.
+2.  LockedIn saves the current application data to the local JSON file.
+3.  LockedIn terminates.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters extra words after `quit` or `q`.
+
+    * 1a1. LockedIn displays an error: `Error: Invalid command format. To save and exit, use quit or q`
+
+      Use case resumes at step 1.
+
+* 2a. LockedIn cannot write to the JSON file.
+
+    * 2a1. LockedIn displays an error: `Error: Unable to save data.`
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
