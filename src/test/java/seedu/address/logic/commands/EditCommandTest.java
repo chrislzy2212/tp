@@ -37,7 +37,9 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Application editedApplication = new ApplicationBuilder().withUrl("http://amy.example.comamy.example.com").build();
+        Application editedApplication = new ApplicationBuilder()
+                .withUrl("http://amy.example.comamy.example.com")
+                .build();
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(editedApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICATION, descriptor);
 

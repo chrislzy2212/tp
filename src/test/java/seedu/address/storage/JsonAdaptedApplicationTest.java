@@ -1,10 +1,14 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedApplication.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalApplications.BENSON;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,9 +16,6 @@ import seedu.address.model.application.Company;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.Phone;
 import seedu.address.model.application.Url;
-import static seedu.address.storage.JsonAdaptedApplication.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.BENSON;
 
 public class JsonAdaptedApplicationTest {
     private static final String INVALID_COMPANY = "R@chel";
