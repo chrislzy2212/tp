@@ -137,7 +137,7 @@ public class EditCommand extends Command {
         private Company company;
         private Phone phone;
         private Email email;
-        private Optional<Url> url;
+        private Url url;
         private Set<Tag> tags;
 
         public EditApplicationDescriptor() {}
@@ -185,14 +185,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setUrl(Optional<Url> url) {
+        public void setUrl(Url url) {
             this.url = url;
         }
 
         public Optional<Url> getUrl() {
-            return url;
+            return Optional.ofNullable(url);
         }
-
+        
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.

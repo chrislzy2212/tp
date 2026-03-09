@@ -14,7 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.application.Address;
+import seedu.address.model.application.Url;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.Phone;
@@ -23,13 +23,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_COMPANY = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_URL = "invalid_url";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_COMPANY = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_URL = "https://www.rachelwalker.com";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -103,26 +103,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseUrl_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUrl((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseUrl_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUrl(INVALID_URL));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseUrl_validValueWithoutWhitespace_returnsUrl() throws Exception {
+        Url expectedUrl = new Url(VALID_URL);
+        assertEquals(expectedUrl, ParserUtil.parseUrl(VALID_URL));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseUrl_validValueWithWhitespace_returnsTrimmedUrl() throws Exception {
+        String urlWithWhitespace = WHITESPACE + VALID_URL + WHITESPACE;
+        Url expectedUrl = new Url(VALID_URL);
+        assertEquals(expectedUrl, ParserUtil.parseUrl(urlWithWhitespace));
     }
 
     @Test

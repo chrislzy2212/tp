@@ -1,26 +1,25 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.ALICE;
-import static seedu.address.testutil.TypicalApplications.getTypicalAddressBook;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.exceptions.DuplicateApplicationException;
 import seedu.address.testutil.ApplicationBuilder;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalApplications.ALICE;
+import static seedu.address.testutil.TypicalApplications.getTypicalAddressBook;
 
 public class AddressBookTest {
 
@@ -46,7 +45,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationException() {
         // Two applications with the same identity fields
-        Application editedAlice = new ApplicationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Application> newApplications = Arrays.asList(ALICE, editedAlice);
@@ -74,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasApplication_applicationWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addApplication(ALICE);
-        Application editedAlice = new ApplicationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasApplication(editedAlice));

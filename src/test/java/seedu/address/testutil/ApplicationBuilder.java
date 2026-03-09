@@ -1,13 +1,14 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.Phone;
+import seedu.address.model.application.Url;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,12 +20,11 @@ public class ApplicationBuilder {
     public static final String DEFAULT_COMPANY = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Company company;
     private Phone phone;
     private Email email;
-    private Address address;
+    private Optional<Url> url;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +34,7 @@ public class ApplicationBuilder {
         company = new Company(DEFAULT_COMPANY);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        url = Optional.empty();
         tags = new HashSet<>();
     }
 
@@ -45,7 +45,7 @@ public class ApplicationBuilder {
         company = applicationToCopy.getCompany();
         phone = applicationToCopy.getPhone();
         email = applicationToCopy.getEmail();
-        address = applicationToCopy.getAddress();
+        url = applicationToCopy.getUrl();
         tags = new HashSet<>(applicationToCopy.getTags());
     }
 
@@ -66,10 +66,10 @@ public class ApplicationBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Application} that we are building.
+     * Sets the {@code Url} of the {@code Application} that we are building.
      */
-    public ApplicationBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public ApplicationBuilder withUrl(String url) {
+        this.url = (url != null) ? Optional.of(new Url(url)) : Optional.empty();
         return this;
     }
 
@@ -90,7 +90,7 @@ public class ApplicationBuilder {
     }
 
     public Application build() {
-        return new Application(company, phone, email, address, tags);
+        return new Application(company, phone, email, url, tags);
     }
 
 }

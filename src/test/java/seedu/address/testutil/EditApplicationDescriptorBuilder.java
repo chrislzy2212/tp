@@ -1,15 +1,16 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditApplicationDescriptor;
-import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.Phone;
+import seedu.address.model.application.Url;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,7 +36,7 @@ public class EditApplicationDescriptorBuilder {
         descriptor.setCompany(application.getCompany());
         descriptor.setPhone(application.getPhone());
         descriptor.setEmail(application.getEmail());
-        descriptor.setAddress(application.getAddress());
+        application.getUrl().ifPresent(descriptor::setUrl);
         descriptor.setTags(application.getTags());
     }
 
@@ -64,10 +65,10 @@ public class EditApplicationDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditApplicationDescriptor} that we are building.
+     * Sets the {@code Url} of the {@code EditApplicationDescriptor} that we are building.
      */
-    public EditApplicationDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditApplicationDescriptorBuilder withUrl(String url) {
+        descriptor.setUrl(new Url(url));
         return this;
     }
 

@@ -37,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Application editedApplication = new ApplicationBuilder().build();
+        Application editedApplication = new ApplicationBuilder().withUrl("http://amy.example.comamy.example.com").build();
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(editedApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICATION, descriptor);
 
@@ -46,7 +46,6 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setApplication(model.getFilteredApplicationList().get(0), editedApplication);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

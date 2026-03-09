@@ -56,7 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editApplicationDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_URL).isPresent()) {
-            editApplicationDescriptor.setUrl(Optional.of(ParserUtil.parseUrl(argMultimap.getValue(PREFIX_URL).get())));
+            editApplicationDescriptor.setUrl(ParserUtil.parseUrl(argMultimap.getValue(PREFIX_URL).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editApplicationDescriptor::setTags);
 
