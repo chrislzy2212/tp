@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
@@ -25,7 +25,7 @@ import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,12 +40,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_APPLICATION_DATE + "APPLICATION_DATE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_ROLE + "Software Engineer Intern "
             + PREFIX_APPLICATION_DATE + "2025-12-22";
 
     public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s";
@@ -97,13 +97,13 @@ public class EditCommand extends Command {
         assert applicationToEdit != null;
 
         Company updatedCompany = editApplicationDescriptor.getCompany().orElse(applicationToEdit.getCompany());
-        Phone updatedPhone = editApplicationDescriptor.getPhone().orElse(applicationToEdit.getPhone());
+        Role updatedRole = editApplicationDescriptor.getRole().orElse(applicationToEdit.getRole());
         ApplicationDate updatedApplicationDate = editApplicationDescriptor.getApplicationDate().orElse(
                 applicationToEdit.getApplicationDate());
         Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
         Set<Tag> updatedTags = editApplicationDescriptor.getTags().orElse(applicationToEdit.getTags());
 
-        return new Application(updatedCompany, updatedPhone, updatedApplicationDate, updatedAddress, updatedTags);
+        return new Application(updatedCompany, updatedRole, updatedApplicationDate, updatedAddress, updatedTags);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
      */
     public static class EditApplicationDescriptor {
         private Company company;
-        private Phone phone;
+        private Role role;
         private ApplicationDate applicationDate;
         private Address address;
         private Set<Tag> tags;
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
          */
         public EditApplicationDescriptor(EditApplicationDescriptor toCopy) {
             setCompany(toCopy.company);
-            setPhone(toCopy.phone);
+            setRole(toCopy.role);
             setApplicationDate(toCopy.applicationDate);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
@@ -159,7 +159,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(company, phone, applicationDate, address, tags);
+            return CollectionUtil.isAnyNonNull(company, role, applicationDate, address, tags);
         }
 
         public void setCompany(Company company) {
@@ -170,12 +170,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(company);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setRole(Role role) {
+            this.role = role;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
         }
 
         public void setApplicationDate(ApplicationDate applicationDate) {
@@ -224,7 +224,7 @@ public class EditCommand extends Command {
 
             EditApplicationDescriptor otherEditApplicationDescriptor = (EditApplicationDescriptor) other;
             return Objects.equals(company, otherEditApplicationDescriptor.company)
-                    && Objects.equals(phone, otherEditApplicationDescriptor.phone)
+                    && Objects.equals(role, otherEditApplicationDescriptor.role)
                     && Objects.equals(applicationDate, otherEditApplicationDescriptor.applicationDate)
                     && Objects.equals(address, otherEditApplicationDescriptor.address)
                     && Objects.equals(tags, otherEditApplicationDescriptor.tags);
@@ -234,7 +234,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("company", company)
-                    .add("phone", phone)
+                    .add("role", role)
                     .add("applicationDate", applicationDate)
                     .add("address", address)
                     .add("tags", tags)

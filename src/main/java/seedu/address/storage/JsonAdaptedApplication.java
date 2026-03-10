@@ -14,7 +14,7 @@ import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,7 +25,7 @@ class JsonAdaptedApplication {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Application's %s field is missing!";
 
     private final String company;
-    private final String phone;
+    private final String role;
     private final String applicationDate;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -34,11 +34,12 @@ class JsonAdaptedApplication {
      * Constructs a {@code JsonAdaptedApplication} with the given application details.
      */
     @JsonCreator
-    public JsonAdaptedApplication(@JsonProperty("company") String company, @JsonProperty("phone") String phone,
-            @JsonProperty("applicationDate") String applicationDate, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedApplication(@JsonProperty("company") String company, @JsonProperty("role") String role,
+                                  @JsonProperty("applicationDate") String applicationDate,
+                                  @JsonProperty("address") String address,
+                                  @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.company = company;
-        this.phone = phone;
+        this.role = role;
         this.applicationDate = applicationDate;
         this.address = address;
         if (tags != null) {
@@ -51,7 +52,7 @@ class JsonAdaptedApplication {
      */
     public JsonAdaptedApplication(Application source) {
         company = source.getCompany().value;
-        phone = source.getPhone().value;
+        role = source.getRole().value;
         applicationDate = source.getApplicationDate().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
@@ -78,13 +79,13 @@ class JsonAdaptedApplication {
         }
         final Company modelCompany = new Company(company);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Role modelRole = new Role(role);
 
         if (applicationDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -104,7 +105,9 @@ class JsonAdaptedApplication {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
-        return new Application(modelCompany, modelPhone, modelApplicationDate, modelAddress, modelTags);
+        return new Application(modelCompany, modelRole, modelApplicationDate, modelAddress, modelTags);
     }
 
 }
+
+

@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -31,7 +31,7 @@ public class ApplicationUtil {
     public static String getApplicationDetails(Application application) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_COMPANY + application.getCompany().value + " ");
-        sb.append(PREFIX_PHONE + application.getPhone().value + " ");
+        sb.append(PREFIX_ROLE + application.getRole().value + " ");
         sb.append(PREFIX_APPLICATION_DATE + application.getApplicationDate().value + " ");
         sb.append(PREFIX_ADDRESS + application.getAddress().value + " ");
         application.getTags().stream().forEach(
@@ -46,7 +46,7 @@ public class ApplicationUtil {
     public static String getEditApplicationDescriptorDetails(EditApplicationDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getCompany().ifPresent(company -> sb.append(PREFIX_COMPANY).append(company.value).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.value).append(" "));
         descriptor.getApplicationDate().ifPresent(applicationDate ->
                 sb.append(PREFIX_APPLICATION_DATE).append(applicationDate.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));

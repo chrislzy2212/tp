@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -26,10 +26,10 @@ import seedu.address.testutil.EditApplicationDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_COMPANY_AMY = "Amy Bee";
-    public static final String VALID_COMPANY_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_COMPANY_AMY = "Amazon";
+    public static final String VALID_COMPANY_BOB = "ByteDance";
+    public static final String VALID_ROLE_AMY = "Software Engineer Intern";
+    public static final String VALID_ROLE_BOB = "Data Analyst Intern";
     public static final String VALID_APPLICATION_DATE_AMY = "2026-03-09";
     public static final String VALID_APPLICATION_DATE_BOB = "2026-03-10";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
@@ -39,8 +39,8 @@ public class CommandTestUtil {
 
     public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_AMY;
     public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
+    public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
     public static final String APPLICATION_DATE_DESC_AMY =
             " " + PREFIX_APPLICATION_DATE + VALID_APPLICATION_DATE_AMY;
     public static final String APPLICATION_DATE_DESC_BOB =
@@ -52,7 +52,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "James&";
     // '&' not allowed in company names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "@invalid"; // '@' not allowed in roles
     public static final String INVALID_APPLICATION_DATE_DESC =
             " " + PREFIX_APPLICATION_DATE + "2026/03/09"; // '/' symbol not allowed
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
@@ -66,11 +66,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMY)
-                .withPhone(VALID_PHONE_AMY).withApplicationDate(VALID_APPLICATION_DATE_AMY)
+                .withRole(VALID_ROLE_AMY).withApplicationDate(VALID_APPLICATION_DATE_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-
         DESC_BOB = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BOB)
-                .withPhone(VALID_PHONE_BOB).withApplicationDate(VALID_APPLICATION_DATE_BOB)
+                .withRole(VALID_ROLE_BOB).withApplicationDate(VALID_APPLICATION_DATE_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

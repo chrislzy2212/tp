@@ -9,7 +9,7 @@ import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,7 +33,7 @@ public class EditApplicationDescriptorBuilder {
     public EditApplicationDescriptorBuilder(Application application) {
         descriptor = new EditApplicationDescriptor();
         descriptor.setCompany(application.getCompany());
-        descriptor.setPhone(application.getPhone());
+        descriptor.setRole(application.getRole());
         descriptor.setApplicationDate(application.getApplicationDate());
         descriptor.setAddress(application.getAddress());
         descriptor.setTags(application.getTags());
@@ -48,10 +48,10 @@ public class EditApplicationDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditApplicationDescriptor} that we are building.
+     * Sets the {@code Role} of the {@code EditApplicationDescriptor} that we are building.
      */
-    public EditApplicationDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+    public EditApplicationDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
         return this;
     }
 

@@ -17,18 +17,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.Role;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_COMPANY = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_ROLE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_APPLICATION_DATE = "2026/03/09";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_COMPANY = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_ROLE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_APPLICATION_DATE = "2026-03-09";
     private static final String VALID_TAG_1 = "friend";
@@ -77,26 +77,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parseRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole((String) null));
     }
 
     @Test
-    public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+    public void parseRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE));
     }
 
     @Test
-    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+    public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE));
     }
 
     @Test
-    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
     }
 
     @Test

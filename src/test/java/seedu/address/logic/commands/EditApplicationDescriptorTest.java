@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -41,8 +41,8 @@ public class EditApplicationDescriptorTest {
                 .withCompany(VALID_COMPANY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different phone -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        // different role -> returns false
+        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withRole(VALID_ROLE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different application date -> returns false
@@ -63,8 +63,8 @@ public class EditApplicationDescriptorTest {
     public void toStringMethod() {
         EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
         String expected = EditApplicationDescriptor.class.getCanonicalName() + "{company="
-                + editApplicationDescriptor.getCompany().orElse(null) + ", phone="
-                + editApplicationDescriptor.getPhone().orElse(null) + ", applicationDate="
+                + editApplicationDescriptor.getCompany().orElse(null) + ", role="
+                + editApplicationDescriptor.getRole().orElse(null) + ", applicationDate="
                 + editApplicationDescriptor.getApplicationDate().orElse(null) + ", address="
                 + editApplicationDescriptor.getAddress().orElse(null) + ", tags="
                 + editApplicationDescriptor.getTags().orElse(null) + "}";

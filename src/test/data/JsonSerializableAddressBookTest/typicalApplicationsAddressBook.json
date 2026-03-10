@@ -1,44 +1,44 @@
 {
   "_comment": "AddressBook save file which contains the same Application values as in TypicalApplications#getTypicalAddressBook()",
   "applications" : [ {
-    "company" : "Alice Pauline",
-    "phone" : "94351253",
+    "company" : "Accenture",
+    "role" : "Software Engineer",
     "applicationDate" : "2026-01-01",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ]
   }, {
-    "company" : "Benson Meier",
-    "phone" : "98765432",
+    "company" : "Meta",
+    "role" : "Data Analyst",
     "applicationDate" : "2026-01-02",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ]
   }, {
-    "company" : "Carl Kurz",
-    "phone" : "95352563",
+    "company" : "Google",
+    "role" : "Mobile Developer",
     "applicationDate" : "2026-01-03",
     "address" : "wall street",
     "tags" : [ ]
   }, {
-    "company" : "Daniel Meier",
-    "phone" : "87652533",
+    "company" : "Dyson",
+    "role" : "Backend Developer",
     "applicationDate" : "2026-01-04",
     "address" : "10th street",
     "tags" : [ "friends" ]
   }, {
-    "company" : "Elle Meyer",
-    "phone" : "9482224",
+    "company" : "Tencent",
+    "role" : "UX Designer",
     "applicationDate" : "2026-01-05",
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
-    "company" : "Fiona Kunz",
-    "phone" : "9482427",
+    "company" : "Foodpanda",
+    "role" : "Frontend Developer",
     "applicationDate" : "2026-01-06",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
-    "company" : "George Best",
-    "phone" : "9482442",
+    "company" : "Grab",
+    "role" : "DevOps Engineer",
     "applicationDate" : "2026-01-07",
     "address" : "4th street",
     "tags" : [ ]

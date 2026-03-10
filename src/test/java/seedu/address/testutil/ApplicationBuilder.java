@@ -7,7 +7,7 @@ import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -16,13 +16,13 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class ApplicationBuilder {
 
-    public static final String DEFAULT_COMPANY = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_COMPANY = "Amazon";
+    public static final String DEFAULT_ROLE = "Software Engineer Intern";
     public static final String DEFAULT_APPLICATION_DATE = "2026-03-09";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Company company;
-    private Phone phone;
+    private Role role;
     private ApplicationDate applicationDate;
     private Address address;
     private Set<Tag> tags;
@@ -32,7 +32,7 @@ public class ApplicationBuilder {
      */
     public ApplicationBuilder() {
         company = new Company(DEFAULT_COMPANY);
-        phone = new Phone(DEFAULT_PHONE);
+        role = new Role(DEFAULT_ROLE);
         applicationDate = new ApplicationDate(DEFAULT_APPLICATION_DATE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
@@ -43,7 +43,7 @@ public class ApplicationBuilder {
      */
     public ApplicationBuilder(Application applicationToCopy) {
         company = applicationToCopy.getCompany();
-        phone = applicationToCopy.getPhone();
+        role = applicationToCopy.getRole();
         applicationDate = applicationToCopy.getApplicationDate();
         address = applicationToCopy.getAddress();
         tags = new HashSet<>(applicationToCopy.getTags());
@@ -74,10 +74,10 @@ public class ApplicationBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Application} that we are building.
+     * Sets the {@code Role} of the {@code Application} that we are building.
      */
-    public ApplicationBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public ApplicationBuilder withRole(String role) {
+        this.role = new Role(role);
         return this;
     }
 
@@ -90,7 +90,7 @@ public class ApplicationBuilder {
     }
 
     public Application build() {
-        return new Application(company, phone, applicationDate, address, tags);
+        return new Application(company, role, applicationDate, address, tags);
     }
 
 }

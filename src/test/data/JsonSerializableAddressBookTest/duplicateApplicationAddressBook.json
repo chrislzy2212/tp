@@ -1,14 +1,14 @@
 {
   "applications": [ {
-    "company": "Alice Pauline",
-    "phone": "94351253",
+    "company": "Accenture",
+    "role": "Software Engineer",
     "applicationDate": "2026-03-09",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
-    "company": "Alice Pauline",
-    "phone": "94351253",
-    "applicationDate": "2026-03-09",
+    "company": "Accenture",
+    "role": "Software Engineer",
+    "applicationDate": "2026-03-10",
     "address": "4th street"
   } ]
 }

@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -16,7 +16,7 @@ import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,23 +31,23 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY, PREFIX_PHONE, PREFIX_APPLICATION_DATE, PREFIX_ADDRESS,
+                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY, PREFIX_ROLE, PREFIX_APPLICATION_DATE, PREFIX_ADDRESS,
                         PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_APPLICATION_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_APPLICATION_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY, PREFIX_PHONE, PREFIX_APPLICATION_DATE, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY, PREFIX_ROLE, PREFIX_APPLICATION_DATE, PREFIX_ADDRESS);
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         ApplicationDate applicationDate = ParserUtil.parseApplicationDate(
                 argMultimap.getValue(PREFIX_APPLICATION_DATE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Application application = new Application(company, phone, applicationDate, address, tagList);
+        Application application = new Application(company, role, applicationDate, address, tagList);
 
         return new AddCommand(application);
     }
