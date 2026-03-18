@@ -27,7 +27,7 @@ LockedIn is a **desktop app for managing job applications, optimized for use via
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   Some example commands you can try:a
 
    * `list` : Lists all applications.
 

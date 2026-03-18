@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "LockedIn",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "Internship Application Tracker",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
