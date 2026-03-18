@@ -50,7 +50,9 @@ public class Application {
         return url;
     }
 
-    public Status getStatus() { return status; }
+    public Status getStatus() {
+        return status;
+    }
 
     /**
      * Returns true if both applications have the same company name.

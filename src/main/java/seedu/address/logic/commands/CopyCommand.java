@@ -5,14 +5,14 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Application;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import seedu.address.model.application.Url;
 
 /**
