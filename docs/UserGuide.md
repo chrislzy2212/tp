@@ -16,7 +16,7 @@ LockedIn is optimized for users who prefer typing commands. If you are comfortab
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">About LockedIn</span>
+## <span style="color:#4a90e2;">About LockedIn</span>
 <br>
 
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
@@ -64,7 +64,7 @@ It is a fast CLI-based logbook for managing internship applications.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">Quick Start</span>
+## <span style="color:#4a90e2;">Quick Start</span>
 <br>
 
 Follow these steps to get LockedIn running.
@@ -138,7 +138,7 @@ Here are a few commands you can try:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">Features</span>
+## <span style="color:#4a90e2;">Features</span>
 <br>
 
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
@@ -442,18 +442,18 @@ This command removes every application in LockedIn. Use it carefully.
 Exit LockedIn: <code>exit</code>
 </h3>
 
-Exits LockedIn.
+Exits the program.
 
 **Format:** `exit`
 
 **What you should expect**
-- The app closes.
+- The window closes.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">Saving and Editing Data</span>
+## <span style="color:#4a90e2;">Saving and Editing Data</span>
 <br>
 
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
@@ -494,20 +494,20 @@ Before editing the data file:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">FAQ</span>
+## <span style="color:#4a90e2;">FAQ</span>
 <br>
 
-**Q: What date format should I use?**
+**Q: What date format should I use?**<br>
 A: Use the format `yyyy-MM-dd`. For example, `2025-02-14`.
 
 <br>
 
-**Q: What does `INDEX` mean?**
+**Q: What does `INDEX` mean?**<br>
 A: `INDEX` is the number shown next to an application in the current displayed list. Use it for commands like `edit`, `delete`, `next`, and `copy`.
 
 <br>
 
-**Q: Why does my command not work?**
+**Q: Why does my command not work?**<br>
 A: Check the command format carefully. Common mistakes include:
 - using the wrong date format
 - entering an invalid index
@@ -516,29 +516,29 @@ A: Check the command format carefully. Common mistakes include:
 
 <br>
 
-**Q: Why can’t I copy a URL?**
+**Q: Why can’t I copy a URL?**<br>
 A: The selected application may not have a URL saved. Add one first using `edit INDEX u/URL`.
 
 <br>
 
-**Q: How do I return to the full application list after using `find`?**
+**Q: How do I return to the full application list after using `find`?**<br>
 A: Use the `list` command.
 
 <br>
 
-**Q: What statuses can an application have?**
+**Q: What statuses can an application have?**<br>
 A: LockedIn currently uses these statuses: `Applied`, `OA`, `Interview`, `Offered`, `Rejected`, and `Withdrawn`.
 
 <br>
 
-**Q: How do I move my data to another computer?**
+**Q: How do I move my data to another computer?**<br>
 A: Install LockedIn on the other computer and replace the empty data file it creates with the data file from your current LockedIn home folder.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">Known Issues</span>
+## <span style="color:#4a90e2;">Known Issues</span>
 <br>
 
 ##### 1. Application opens off-screen after switching displays
@@ -564,7 +564,7 @@ A: Install LockedIn on the other computer and replace the empty data file it cre
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <span style="color:#4a90e2; text-decoration: underline;">Command Summary</span>
+## <span style="color:#4a90e2;">Command Summary</span>
 <br>
 
 | Action | Format | Example |
