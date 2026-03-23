@@ -439,10 +439,8 @@ This command removes every application in LockedIn. Use it carefully.
 
 <a id="exit"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
-Exit LockedIn: <code>exit</code>
+Exit the program: <code>exit</code>
 </h3>
-
-Exits the program.
 
 **Format:** `exit`
 
