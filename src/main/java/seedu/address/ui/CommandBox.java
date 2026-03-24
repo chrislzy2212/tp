@@ -80,6 +80,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Handles the up arrow key pressed event for command history.
+     */
     private void handleHistoryUp() {
         if (commandHistory.isEmpty() || historyIndex == 0) {
             return;
@@ -94,6 +97,9 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(commandTextField.getText().length());
     }
 
+    /**
+     * Handles the down arrow key pressed event for command history.
+     */
     private void handleHistoryDown() {
         if (commandHistory.isEmpty() || historyIndex == commandHistory.size()) {
             return;
