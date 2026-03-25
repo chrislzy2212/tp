@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
@@ -20,6 +21,9 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
+
+    @FXML
+    private Label commandPrefixLabel;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -54,6 +58,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandPrefixLabel.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
     /**
@@ -67,6 +72,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+        commandPrefixLabel.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 
     /**
