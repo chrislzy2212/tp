@@ -388,6 +388,30 @@ Removes an existing alias.
 
 ---
 
+<a id="alias-list"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+List all saved aliases: <code>alias-list</code>
+</h3>
+
+Displays all currently saved aliases.
+
+| Before                                         | After                                        |
+|------------------------------------------------|----------------------------------------------|
+| ![beforeAliasList](images/beforeAliasList.png) | ![afterAliasList](images/afterAliasList.png) |
+
+**Format:** `alias-list`
+
+**Examples**
+- `alias-list`
+
+**What you should expect**
+
+- All saved aliases are shown in the response box.
+- Each alias is displayed in the format `ALIAS -> COMMAND`.
+- If there are no saved aliases, a message will be shown to let you know.
+
+---
+
 <a id="find"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
 Find applications: <code>find</code>

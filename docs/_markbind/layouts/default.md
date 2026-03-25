@@ -39,6 +39,7 @@
     * [Copy Command]({{ baseUrl }}/UserGuide.html#copy)
     * [Alias Command]({{ baseUrl }}/UserGuide.html#alias)
     * [Unalias Command]({{ baseUrl }}/UserGuide.html#unalias)
+    * [Alias-List Command]({{ baseUrl }}/UserGuide.html#alias-list)
     * [Find Command]({{ baseUrl }}/UserGuide.html#find)
     * [Delete Command]({{ baseUrl }}/UserGuide.html#delete)
     * [Clear Command]({{ baseUrl }}/UserGuide.html#clear)
