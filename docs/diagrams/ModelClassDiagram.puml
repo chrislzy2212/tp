@@ -39,9 +39,9 @@ AddressBook *--> "1" UniqueApplicationList
 UniqueApplicationList --> "~* all" Application
 Application *--> Company
 Application *--> Role
-Application *--> "       0.. 1"Url
+Application *--> "       0..1"Url
 Application *--> ApplicationDate
-Application *--> "   0.. 1" Status
+Application *--> "   0..1" Status
 
 Application -[hidden]up--> I
 UniqueApplicationList -[hidden]right-> I
