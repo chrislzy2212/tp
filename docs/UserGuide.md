@@ -370,6 +370,24 @@ Creates a shortcut for an existing command word.
 
 ---
 
+<a id="unalias"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+Remove an alias for a command word: <code>unalias</code>
+</h3>
+
+Removes an existing alias.
+
+**Format:** `unalias ALIAS`
+
+**Examples**
+- `unalias ls`
+
+**What you should expect**
+- The alias is removed.
+- After `unalias ls`, entering `ls` will no longer work unless you create it again.
+
+---
+
 <a id="find"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
 Find applications: <code>find</code>
