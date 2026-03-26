@@ -61,21 +61,46 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.lockedInFilePath = addressBookFilePath;
     }
 
+    /**
+     * Returns an unmodifiable view of the aliases stored in user preferences.
+     *
+     * @return A map containing alias-command word pairs.
+     */
     public Map<String, String> getAliases() {
         return Collections.unmodifiableMap(aliases);
     }
 
+    /**
+     * Replaces the current aliases with the given aliases.
+     *
+     * @param aliases A map of alias-command word pairs to set.
+     */
     public void setAliases(Map<String, String> aliases) {
         requireNonNull(aliases);
         this.aliases = new HashMap<>(aliases);
     }
 
+    /**
+     * Adds or updates an alias for a command word.
+     *
+     * @param alias The alias to be added or updated.
+     * @param commandWord The command word that the alias maps to.
+     */
     public void setAlias(String alias, String commandWord) {
         requireNonNull(alias);
         requireNonNull(commandWord);
         aliases.put(alias, commandWord);
     }
 
+    /**
+     * Removes the given alias.
+     *
+     * @param alias The alias to be removed.
+     */
+    public void removeAlias(String alias) {
+        requireNonNull(alias);
+        aliases.remove(alias);
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -86,6 +86,16 @@ public class ModelManager implements Model {
         userPrefs.setAlias(alias, commandWord);
     }
 
+    @Override
+    public boolean hasAlias(String alias) {
+        return userPrefs.getAliases().containsKey(alias);
+    }
+
+    @Override
+    public void removeAlias(String alias) {
+        userPrefs.removeAlias(alias);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override

@@ -367,6 +367,50 @@ Creates a shortcut for an existing command word.
 **What you should expect**
 - You can use the alias in place of the original command word.
 - Example: after `alias ls list`, entering `ls` will run `list`.
+- If the alias already exists, it will be updated to point to the new command word.
+- The app will inform you when an existing alias has been overwritten.
+
+---
+
+<a id="unalias"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+Remove an alias for a command word: <code>unalias</code>
+</h3>
+
+Removes an existing alias.
+
+**Format:** `unalias ALIAS`
+
+**Examples**
+- `unalias ls`
+
+**What you should expect**
+- The alias is removed.
+- After `unalias ls`, entering `ls` will no longer work unless you create it again.
+
+---
+
+<a id="alias-list"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+List all saved aliases: <code>alias-list</code>
+</h3>
+
+Displays all currently saved aliases.
+
+| Before                                         | After                                        |
+|------------------------------------------------|----------------------------------------------|
+| ![beforeAliasList](images/beforeAliasList.png) | ![afterAliasList](images/afterAliasList.png) |
+
+**Format:** `alias-list`
+
+**Examples**
+- `alias-list`
+
+**What you should expect**
+
+- All saved aliases are shown in the response box.
+- Each alias is displayed in the format `ALIAS -> COMMAND`.
+- If there are no saved aliases, a message will be shown to let you know.
 
 ---
 

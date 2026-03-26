@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
@@ -43,13 +44,30 @@ public class AliasCommandTest {
     }
 
     @Test
+    public void execute_existingAlias_overwritesAlias() throws Exception {
+        Model model = new ModelManager();
+        model.setAlias("ls", "list");
+
+        AliasCommand command = new AliasCommand("ls", "copy");
+        CommandResult result = command.execute(model);
+
+        assertEquals(String.format(AliasCommand.MESSAGE_OVERWRITE_SUCCESS,
+                "ls", "copy", "list"), result.getFeedbackToUser());
+        assertEquals("copy", model.getAliases().get("ls"));
+    }
+
+    @Test
     public void equals() {
         AliasCommand firstCommand = new AliasCommand("ls", "list");
-        AliasCommand secondCommand = new AliasCommand("rm", "delete");
+        AliasCommand secondCommand = new AliasCommand("ls", "copy");
+        AliasCommand firstCommandCopy = new AliasCommand("ls", "list");
 
         assertEquals(firstCommand, firstCommand);
-        org.junit.jupiter.api.Assertions.assertNotEquals(firstCommand, secondCommand);
-        org.junit.jupiter.api.Assertions.assertNotEquals(firstCommand, null);
-        org.junit.jupiter.api.Assertions.assertNotEquals(firstCommand, new ClearCommand());
+        assertEquals(firstCommand, firstCommandCopy);
+
+        assertNotEquals(firstCommand, 1);
+        assertNotEquals(firstCommand, null);
+        assertNotEquals(firstCommand, secondCommand);
+        assertNotEquals(firstCommand, new ClearCommand());
     }
 }

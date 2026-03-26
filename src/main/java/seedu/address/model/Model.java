@@ -56,6 +56,16 @@ public interface Model {
     void setAlias(String alias, String commandWord);
 
     /**
+     * Returns true if the alias exists.
+     */
+    boolean hasAlias(String alias);
+
+    /**
+     * Removes the given alias.
+     */
+    void removeAlias(String alias);
+
+    /**
      * * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
