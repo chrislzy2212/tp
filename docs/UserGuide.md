@@ -165,6 +165,13 @@ Notes about the command format
 
 </box>
 
+<box type="tip" seamless>
+
+**Tip:**
+You can press the `Up` and `Down` arrow keys in the command box to browse previously entered commands.
+
+</box>
+
 ---
 
 <a id="help"></a>
