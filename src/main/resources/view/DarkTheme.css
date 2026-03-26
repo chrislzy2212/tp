@@ -52,12 +52,12 @@
 
 .menu-pane {
     -fx-font-size: 14pt;
-    -fx-font-family: "Consolas", "Courier New", monospace
+    -fx-font-family: "Consolas", "Courier New", monospace;
     -fx-text-fill: white;
 }
 
 .context-menu-label {
-    -fx-font-family: "Consolas", "Courier New", monospace
+    -fx-font-family: "Consolas", "Courier New", monospace;
     -fx-text-fill: white;
 }
 
@@ -189,14 +189,14 @@
 .cell_index_label {
     -fx-font-family: "Consolas", "Courier New", monospace;
     -fx-font-size: 16px;
-    -fx-font-weight: semi-bold;
+    -fx-font-weight: normal;
     -fx-text-fill: #6B7280;
 }
 
 .cell_small_label {
     -fx-font-family: "Consolas", "Courier New", monospace;
     -fx-font-size: 16px;
-    -fx-font-weight: semi-bold;
+    -fx-font-weight: normal;
     -fx-text-fill: #6B7280;
 }
 
