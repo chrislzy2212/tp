@@ -639,12 +639,16 @@ A: Install LockedIn on the other computer and replace the empty data file it cre
 | Action | Format | Example |
 | --- | --- | --- |
 | **Add** | `add n/COMPANY r/ROLE d/APPLICATION_DATE [u/URL] [s/STATUS]` | `add n/Google r/Software Engineer Intern d/2025-02-14 u/https://careers.google.com s/Applied` |
+| **Alias** | `alias ALIAS COMMAND_WORD` | `alias ls list` |
+| **Alias List** | `alias-list` | `alias-list` |
 | **Clear** | `clear` | `clear` |
 | **Copy** | `copy INDEX` | `copy 3` |
 | **Delete** | `delete INDEX` | `delete 3` |
+| **Drop** | `drop` | `drop` |
 | **Edit** | `edit INDEX [n/COMPANY] [r/ROLE] [d/APPLICATION_DATE] [u/URL] [s/STATUS]` | `edit 2 n/OpenAI s/Offered` |
 | **Find** | `find [n/COMPANY_NAME] [r/ROLE] [d/APPLICATION_DATE] [s/STATUS]...` | `find n/Google r/Intern` |
 | **Help** | `help` | `help` |
 | **List** | `list` | `list` |
 | **Next** | `next INDEX` | `next 3` |
+| **Unalias** | `unalias ALIAS` | `unalias ls` |
 | **Exit** | `exit` | `exit` |
