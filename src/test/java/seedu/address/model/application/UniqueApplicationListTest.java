@@ -3,8 +3,8 @@ package seedu.address.model.application;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BYTEDANCE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 import static seedu.address.testutil.TypicalApplications.BOB;
@@ -42,8 +42,8 @@ public class UniqueApplicationListTest {
     @Test
     public void contains_applicationWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicationList.add(ALICE);
-        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
-                .withStatus(VALID_STATUS_BOB).build();
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BYTEDANCE)
+                .withStatus(VALID_STATUS_BYTEDANCE).build();
         assertTrue(uniqueApplicationList.contains(editedAlice));
     }
 
@@ -85,8 +85,8 @@ public class UniqueApplicationListTest {
     @Test
     public void setApplication_editedApplicationHasSameIdentity_success() {
         uniqueApplicationList.add(ALICE);
-        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
-                .withStatus(VALID_STATUS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BYTEDANCE)
+                .withStatus(VALID_STATUS_BYTEDANCE)
                 .build();
         uniqueApplicationList.setApplication(ALICE, editedAlice);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();

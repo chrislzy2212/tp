@@ -20,6 +20,18 @@ public enum Status {
             "Status must be one of: Applied, OA, Interview, Offered, Rejected, Withdrawn.";
 
     /**
+     * Returns true if {@code input} can be parsed into a valid {@code Status}.
+     */
+    public static boolean isValidStatus(String input) {
+        try {
+            fromUserInput(input);
+            return true;
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return false;
+        }
+    }
+
+    /**
      * Returns the {@code Status} corresponding to the given user input.
      * Input is case-insensitive and leading/trailing whitespace will be ignored.
      *

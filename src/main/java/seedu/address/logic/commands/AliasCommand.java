@@ -32,6 +32,7 @@ public class AliasCommand extends Command {
             EditCommand.COMMAND_WORD,
             DeleteCommand.COMMAND_WORD,
             NextCommand.COMMAND_WORD,
+            NoteCommand.COMMAND_WORD,
             ClearCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD,
             ListCommand.COMMAND_WORD,

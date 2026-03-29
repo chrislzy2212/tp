@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
+import seedu.address.model.application.Note;
 import seedu.address.model.application.Role;
 import seedu.address.model.application.Status;
 import seedu.address.model.application.Url;
@@ -20,12 +21,14 @@ public class ParserUtilTest {
     private static final String INVALID_URL = "invalid_url";
     private static final String INVALID_APPLICATION_DATE = "2026/03/09";
     private static final String INVALID_STATUS = "Pending";
+    private static final String INVALID_NOTE = "a".repeat(201);
 
     private static final String VALID_COMPANY = "Rachel Walker";
     private static final String VALID_ROLE = "123456";
     private static final String VALID_URL = "https://www.rachelwalker.com";
     private static final String VALID_APPLICATION_DATE = "2026-03-09";
     private static final String VALID_STATUS = "Interview";
+    private static final String VALID_NOTE = "Prepare for OA";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -157,5 +160,28 @@ public class ParserUtilTest {
     public void parseStatus_validValueWithWhitespace_returnsTrimmedStatus() throws Exception {
         String statusWithWhitespace = WHITESPACE + VALID_STATUS + WHITESPACE;
         assertEquals(Status.INTERVIEW, ParserUtil.parseStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parseNote_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNote(null));
+    }
+
+    @Test
+    public void parseNote_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNote(INVALID_NOTE));
+    }
+
+    @Test
+    public void parseNote_validValueWithoutWhitespace_returnsNote() throws Exception {
+        Note expectedNote = new Note(VALID_NOTE);
+        assertEquals(expectedNote, ParserUtil.parseNote(VALID_NOTE));
+    }
+
+    @Test
+    public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
+        String noteWithWhitespace = WHITESPACE + VALID_NOTE + WHITESPACE;
+        Note expectedNote = new Note(VALID_NOTE);
+        assertEquals(expectedNote, ParserUtil.parseNote(noteWithWhitespace));
     }
 }

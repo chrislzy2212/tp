@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
+import seedu.address.model.application.Note;
 import seedu.address.model.application.Role;
 import seedu.address.model.application.Status;
 import seedu.address.model.application.Url;
@@ -102,8 +103,10 @@ public class EditCommand extends Command {
                 ? editApplicationDescriptor.getUrl()
                 : applicationToEdit.getUrl();
         Status updatedStatus = editApplicationDescriptor.getStatus().orElse(applicationToEdit.getStatus());
+        Note updatedNote = applicationToEdit.getNote(); //edit command does not allow editing notes
 
-        return new Application(updatedCompany, updatedRole, updatedApplicationDate, updatedUrl, updatedStatus);
+        return new Application(updatedCompany, updatedRole, updatedApplicationDate, updatedUrl, updatedStatus,
+                updatedNote);
     }
 
     @Override

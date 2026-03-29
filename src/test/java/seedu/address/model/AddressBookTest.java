@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BYTEDANCE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 import static seedu.address.testutil.TypicalApplications.getTypicalAddressBook;
@@ -46,8 +46,8 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationException() {
         // Two applications with the same identity fields
-        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
-                .withStatus(VALID_STATUS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BYTEDANCE)
+                .withStatus(VALID_STATUS_BYTEDANCE)
                 .build();
         List<Application> newApplications = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newApplications);
@@ -74,8 +74,8 @@ public class AddressBookTest {
     @Test
     public void hasApplication_applicationWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addApplication(ALICE);
-        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
-                .withStatus(VALID_STATUS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BYTEDANCE)
+                .withStatus(VALID_STATUS_BYTEDANCE)
                 .build();
         assertTrue(addressBook.hasApplication(editedAlice));
     }

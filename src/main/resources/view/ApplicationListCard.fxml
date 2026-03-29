@@ -6,18 +6,20 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane fx:id="cardGridPane" HBox.hgrow="ALWAYS" hgap="8" >
+<HBox id="cardPane" fx:id="cardPane" maxWidth="Infinity"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane fx:id="cardGridPane" HBox.hgrow="ALWAYS" hgap="8" maxWidth="Infinity">
     <padding>
       <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
     <columnConstraints>
-      <ColumnConstraints percentWidth="5.4"/>   <!-- ID -->
-      <ColumnConstraints percentWidth="13.4"/>  <!-- Company -->
-      <ColumnConstraints percentWidth="23.5"/>  <!-- Role -->
-      <ColumnConstraints percentWidth="17.5"/>  <!-- Status -->
-      <ColumnConstraints percentWidth="13.4"/>  <!-- Date -->
-      <ColumnConstraints percentWidth="26.8"/>   <!-- URL -->
+      <ColumnConstraints percentWidth="5"/>     <!-- ID -->
+      <ColumnConstraints percentWidth="16"/>    <!-- Company -->
+      <ColumnConstraints percentWidth="19"/>    <!-- Role -->
+      <ColumnConstraints percentWidth="10"/>    <!-- Status -->
+      <ColumnConstraints percentWidth="16"/>    <!-- Date -->
+      <ColumnConstraints percentWidth="15"/>    <!-- URL -->
+      <ColumnConstraints percentWidth="19"/>    <!-- Note -->
     </columnConstraints>
 
     <!-- ID -->
@@ -45,16 +47,26 @@
     <!-- Date -->
     <Label fx:id="applicationDate"
            GridPane.columnIndex="4"
-                                    styleClass="cell_small_label">
-                     <GridPane.margin>
-                            <Insets left="12"/>
-                     </GridPane.margin>
-              </Label>
+           styleClass="date-label">
+      <GridPane.margin>
+        <Insets left="12"/>
+      </GridPane.margin>
+    </Label>
 
     <!-- URL -->
     <Label fx:id="url"
            GridPane.columnIndex="5"
-           styleClass="cell_small_label"
+           styleClass="url-label"
+           wrapText="true">
+      <GridPane.margin>
+        <Insets left="12"/>
+      </GridPane.margin>
+    </Label>
+
+    <!-- Note -->
+    <Label fx:id="note"
+           GridPane.columnIndex="6"
+           styleClass="note-label"
            wrapText="true">
       <GridPane.margin>
         <Insets left="12"/>

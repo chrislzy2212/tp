@@ -13,12 +13,13 @@
       <Insets top="8" right="20" bottom="8" left="20"/>
     </padding>
     <columnConstraints>
-      <ColumnConstraints percentWidth="5.4"/>
-      <ColumnConstraints percentWidth="13.4"/>
-      <ColumnConstraints percentWidth="23.5"/>
-      <ColumnConstraints percentWidth="17.5"/>
-      <ColumnConstraints percentWidth="13.4"/>
-      <ColumnConstraints percentWidth="26.8"/>
+      <ColumnConstraints percentWidth="5"/>
+      <ColumnConstraints percentWidth="12"/>
+      <ColumnConstraints percentWidth="19"/>
+      <ColumnConstraints percentWidth="14"/>
+      <ColumnConstraints percentWidth="12"/>
+      <ColumnConstraints percentWidth="19"/>
+      <ColumnConstraints percentWidth="19"/>
     </columnConstraints>
 
     <Label text="ID" GridPane.columnIndex="0" styleClass="application-list-header-label"/>
@@ -31,6 +32,11 @@
       </GridPane.margin>
     </Label>
     <Label text="URL" GridPane.columnIndex="5" styleClass="application-list-header-label">
+      <GridPane.margin>
+        <Insets left="12"/>
+      </GridPane.margin>
+    </Label>
+    <Label text="NOTE" GridPane.columnIndex="6" styleClass="application-list-header-label">
       <GridPane.margin>
         <Insets left="12"/>
       </GridPane.margin>

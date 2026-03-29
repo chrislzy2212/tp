@@ -1,11 +1,25 @@
 package seedu.address.model.application;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class StatusTest {
+
+    @Test
+    public void isValidStatus() {
+        assertFalse(Status.isValidStatus(null));
+
+        assertFalse(Status.isValidStatus(""));
+        assertFalse(Status.isValidStatus("Pending"));
+
+        assertTrue(Status.isValidStatus("Applied"));
+        assertTrue(Status.isValidStatus("applied"));
+        assertTrue(Status.isValidStatus(" OA "));
+    }
 
     @Test
     public void fromUserInput_null_throwsNullPointerException() {

@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BYTEDANCE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showApplicationAtIndex;
@@ -57,11 +57,11 @@ public class EditCommandTest {
         Application lastApplication = model.getFilteredApplicationList().get(indexLastApplication.getZeroBased());
 
         ApplicationBuilder applicationInList = new ApplicationBuilder(lastApplication);
-        Application editedApplication = applicationInList.withCompany(VALID_COMPANY_BOB).withRole(VALID_ROLE_BOB)
-                .withStatus(VALID_STATUS_BOB).build();
+        Application editedApplication = applicationInList.withCompany(VALID_COMPANY_BYTEDANCE).withRole(VALID_ROLE_BYTEDANCE)
+                .withStatus(VALID_STATUS_BYTEDANCE).build();
 
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BOB)
-                .withRole(VALID_ROLE_BOB).withStatus(VALID_STATUS_BOB).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BYTEDANCE)
+                .withRole(VALID_ROLE_BYTEDANCE).withStatus(VALID_STATUS_BYTEDANCE).build();
         EditCommand editCommand = new EditCommand(indexLastApplication, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICATION_SUCCESS,
@@ -92,10 +92,10 @@ public class EditCommandTest {
 
         Application applicationInFilteredList = model.getFilteredApplicationList()
                 .get(INDEX_FIRST_APPLICATION.getZeroBased());
-        Application editedApplication = new ApplicationBuilder(applicationInFilteredList).withCompany(VALID_COMPANY_BOB)
+        Application editedApplication = new ApplicationBuilder(applicationInFilteredList).withCompany(VALID_COMPANY_BYTEDANCE)
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICATION,
-                new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BOB).build());
+                new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BYTEDANCE).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICATION_SUCCESS,
                 Messages.format(editedApplication));
@@ -131,7 +131,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidApplicationIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicationList().size() + 1);
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BOB)
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BYTEDANCE)
                 .build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -150,17 +150,17 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getApplicationList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BOB).build());
+                new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BYTEDANCE).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_APPLICATION, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_APPLICATION, DESC_AMAZON);
 
         // same values -> returns true
-        EditApplicationDescriptor copyDescriptor = new EditApplicationDescriptor(DESC_AMY);
+        EditApplicationDescriptor copyDescriptor = new EditApplicationDescriptor(DESC_AMAZON);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_APPLICATION, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -174,10 +174,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_APPLICATION, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_APPLICATION, DESC_AMAZON)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_APPLICATION, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_APPLICATION, DESC_BYTEDANCE)));
     }
 
     @Test

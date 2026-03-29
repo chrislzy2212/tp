@@ -45,7 +45,9 @@ public class Messages {
                 .append("; URL: ")
                 .append(application.getUrl().map(u -> u.value).orElse("-"))
                 .append("; Status: ")
-                .append(application.getStatus());
+                .append(application.getStatus())
+                .append("; Note: ")
+                .append(application.getNote().toString().isEmpty() ? "-" : application.getNote());
         return builder.toString();
     }
 

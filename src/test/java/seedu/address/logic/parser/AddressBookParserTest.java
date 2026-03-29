@@ -27,10 +27,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.UnaliasCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationContainsKeywordsPredicate;
+import seedu.address.model.application.Note;
 import seedu.address.testutil.ApplicationBuilder;
 import seedu.address.testutil.ApplicationUtil;
 import seedu.address.testutil.EditApplicationDescriptorBuilder;
@@ -41,7 +43,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Application application = new ApplicationBuilder().build();
+        Application application = new ApplicationBuilder().withNote("").build();
         AddCommand command = (AddCommand) parser.parseCommand(ApplicationUtil.getAddCommand(application));
         assertEquals(new AddCommand(application), command);
     }
@@ -92,6 +94,12 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new ApplicationContainsKeywordsPredicate(keywords, new ArrayList<>(),
                 new ArrayList<>(), new ArrayList<>())), command);
+    }
+
+    @Test
+    public void parseCommand_note() throws Exception {
+        NoteCommand command = (NoteCommand) parser.parseCommand(NoteCommand.COMMAND_WORD + " 1 nt/Prepare for OA");
+        assertEquals(new NoteCommand(INDEX_FIRST_APPLICATION, new Note("Prepare for OA")), command);
     }
 
     @Test

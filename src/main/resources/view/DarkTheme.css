@@ -379,9 +379,6 @@
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 14;
     -fx-font-weight: bold;
-    -fx-min-width: 112;
-    -fx-pref-width: 112;
-    -fx-max-width: 112;
     -fx-alignment: center;
 }
 
@@ -430,4 +427,24 @@
     -fx-font-weight: bold;
     -fx-text-fill: #f3f4f6;
     -fx-padding: 10 0 0 0;
+}
+
+.date-label {
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9ca3af;
+}
+
+.url-label {
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+.note-label {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+    -fx-text-fill: #cbd5e1;
 }

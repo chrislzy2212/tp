@@ -1,27 +1,27 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.APPLICATION_DATE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.APPLICATION_DATE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.APPLICATION_DATE_DESC_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.APPLICATION_DATE_DESC_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMAZON;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPLICATION_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_URL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.URL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.URL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.URL_DESC_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.URL_DESC_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_AMAZON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -55,7 +55,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_COMPANY_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_COMPANY_AMAZON, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -67,10 +67,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + COMPANY_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + COMPANY_DESC_AMAZON, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + COMPANY_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + COMPANY_DESC_AMAZON, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -88,24 +88,24 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS); // invalid status
 
         // invalid role followed by valid application date
-        assertParseFailure(parser, "1" + INVALID_ROLE_DESC + APPLICATION_DATE_DESC_AMY, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_ROLE_DESC + APPLICATION_DATE_DESC_AMAZON, Role.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_COMPANY_DESC + INVALID_APPLICATION_DATE_DESC + VALID_URL_AMY
-                        + VALID_ROLE_AMY,
+        assertParseFailure(parser, "1" + INVALID_COMPANY_DESC + INVALID_APPLICATION_DATE_DESC + VALID_URL_AMAZON
+                        + VALID_ROLE_AMAZON,
                 Company.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_APPLICATION;
-        String userInput = targetIndex.getOneBased() + ROLE_DESC_BOB + STATUS_DESC_BOB
-                + APPLICATION_DATE_DESC_AMY + URL_DESC_AMY + COMPANY_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ROLE_DESC_BYTEDANCE + STATUS_DESC_BYTEDANCE
+                + APPLICATION_DATE_DESC_AMAZON + URL_DESC_AMAZON + COMPANY_DESC_AMAZON;
 
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMY)
-                .withRole(VALID_ROLE_BOB).withApplicationDate(VALID_APPLICATION_DATE_AMY)
-                .withUrl(VALID_URL_AMY)
-                .withStatus(VALID_STATUS_BOB).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMAZON)
+                .withRole(VALID_ROLE_BYTEDANCE).withApplicationDate(VALID_APPLICATION_DATE_AMAZON)
+                .withUrl(VALID_URL_AMAZON)
+                .withStatus(VALID_STATUS_BYTEDANCE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -114,10 +114,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_APPLICATION;
-        String userInput = targetIndex.getOneBased() + ROLE_DESC_BOB + APPLICATION_DATE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ROLE_DESC_BYTEDANCE + APPLICATION_DATE_DESC_AMAZON;
 
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withRole(VALID_ROLE_BOB)
-                .withApplicationDate(VALID_APPLICATION_DATE_AMY).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withRole(VALID_ROLE_BYTEDANCE)
+                .withApplicationDate(VALID_APPLICATION_DATE_AMAZON).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -127,33 +127,33 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // company
         Index targetIndex = INDEX_THIRD_APPLICATION;
-        String userInput = targetIndex.getOneBased() + COMPANY_DESC_AMY;
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMY)
+        String userInput = targetIndex.getOneBased() + COMPANY_DESC_AMAZON;
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMAZON)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // role
-        userInput = targetIndex.getOneBased() + ROLE_DESC_AMY;
-        descriptor = new EditApplicationDescriptorBuilder().withRole(VALID_ROLE_AMY).build();
+        userInput = targetIndex.getOneBased() + ROLE_DESC_AMAZON;
+        descriptor = new EditApplicationDescriptorBuilder().withRole(VALID_ROLE_AMAZON).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // application date
-        userInput = targetIndex.getOneBased() + APPLICATION_DATE_DESC_AMY;
-        descriptor = new EditApplicationDescriptorBuilder().withApplicationDate(VALID_APPLICATION_DATE_AMY).build();
+        userInput = targetIndex.getOneBased() + APPLICATION_DATE_DESC_AMAZON;
+        descriptor = new EditApplicationDescriptorBuilder().withApplicationDate(VALID_APPLICATION_DATE_AMAZON).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // url
-        userInput = targetIndex.getOneBased() + URL_DESC_AMY;
-        descriptor = new EditApplicationDescriptorBuilder().withUrl(VALID_URL_AMY).build();
+        userInput = targetIndex.getOneBased() + URL_DESC_AMAZON;
+        descriptor = new EditApplicationDescriptorBuilder().withUrl(VALID_URL_AMAZON).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // status
-        userInput = targetIndex.getOneBased() + STATUS_DESC_AMY;
-        descriptor = new EditApplicationDescriptorBuilder().withStatus(VALID_STATUS_AMY).build();
+        userInput = targetIndex.getOneBased() + STATUS_DESC_AMAZON;
+        descriptor = new EditApplicationDescriptorBuilder().withStatus(VALID_STATUS_AMAZON).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -165,20 +165,20 @@ public class EditCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_APPLICATION;
-        String userInput = targetIndex.getOneBased() + INVALID_ROLE_DESC + ROLE_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + INVALID_ROLE_DESC + ROLE_DESC_BYTEDANCE;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + ROLE_DESC_BOB + INVALID_ROLE_DESC;
+        userInput = targetIndex.getOneBased() + ROLE_DESC_BYTEDANCE + INVALID_ROLE_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + ROLE_DESC_AMY + URL_DESC_AMY + APPLICATION_DATE_DESC_AMY
-                + STATUS_DESC_AMY + ROLE_DESC_AMY + URL_DESC_AMY + APPLICATION_DATE_DESC_AMY
-                + STATUS_DESC_AMY
-                + ROLE_DESC_BOB + URL_DESC_BOB + APPLICATION_DATE_DESC_BOB + STATUS_DESC_BOB;
+        userInput = targetIndex.getOneBased() + ROLE_DESC_AMAZON + URL_DESC_AMAZON + APPLICATION_DATE_DESC_AMAZON
+                + STATUS_DESC_AMAZON + ROLE_DESC_AMAZON + URL_DESC_AMAZON + APPLICATION_DATE_DESC_AMAZON
+                + STATUS_DESC_AMAZON
+                + ROLE_DESC_BYTEDANCE + URL_DESC_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE + STATUS_DESC_BYTEDANCE;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_APPLICATION_DATE,

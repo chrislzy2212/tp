@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.ColumnConstraints;
@@ -19,7 +20,6 @@ import seedu.address.model.application.Application;
  */
 public class ApplicationListPanel extends UiPart<Region> {
     private static final String FXML = "ApplicationListPanel.fxml";
-    private static final double WIDTH_THRESHOLD = 1000;
     private final Logger logger = LogsCenter.getLogger(ApplicationListPanel.class);
 
     @FXML
@@ -54,45 +54,21 @@ public class ApplicationListPanel extends UiPart<Region> {
 
     /**
      * Updates header column constraints based on the current width.
-     * Switches between fixed-width layout (for small windows &lt; 1000px)
-     * and responsive percentage-based layout (for larger windows &gt;= 1000px).
+     * Uses percentage-based layout so columns remain responsive across window sizes.
      *
      * @param width the current width of the container in pixels
      */
     private void updateColumnConstraints(double width) {
         headerGridPane.getColumnConstraints().clear();
-
-        if (width < WIDTH_THRESHOLD) {
-            headerGridPane.getColumnConstraints().addAll(
-                createFixedColumn(40),
-                createFixedColumn(100),
-                createFixedColumn(175),
-                createFixedColumn(100),
-                createFixedColumn(100),
-                createFixedColumn(200)
-            );
-        } else {
-            headerGridPane.getColumnConstraints().addAll(
-                createPercentColumn(5.4),
-                createPercentColumn(13.4),
-                createPercentColumn(23.5),
-                createPercentColumn(17.5),
-                createPercentColumn(13.4),
-                createPercentColumn(26.8)
-            );
-        }
-    }
-
-    /**
-     * Creates a column constraint with a responsive percentage-based width.
-     *
-     * @param percent the percentage width for this column relative to the container width
-     * @return a ColumnConstraints object configured with the specified percentage width
-     */
-    private ColumnConstraints createFixedColumn(double width) {
-        ColumnConstraints constraint = new ColumnConstraints();
-        constraint.setPrefWidth(width);
-        return constraint;
+        headerGridPane.getColumnConstraints().addAll(
+            createPercentColumn(5),
+            createPercentColumn(12),
+            createPercentColumn(19),
+            createPercentColumn(14),
+            createPercentColumn(12),
+            createPercentColumn(19),
+            createPercentColumn(19)
+        );
     }
 
     private ColumnConstraints createPercentColumn(double percent) {
@@ -105,6 +81,11 @@ public class ApplicationListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Application} using a {@code ApplicationCard}.
      */
     class ApplicationListViewCell extends ListCell<Application> {
+
+        ApplicationListViewCell() {
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        }
+
         @Override
         protected void updateItem(Application application, boolean empty) {
             super.updateItem(application, empty);
@@ -113,7 +94,9 @@ public class ApplicationListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ApplicationCard(application, getIndex() + 1).getRoot());
+                Region card = new ApplicationCard(application, getIndex() + 1).getRoot();
+                card.prefWidthProperty().bind(widthProperty().subtract(18));
+                setGraphic(card);
             }
         }
     }

@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BYTEDANCE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_AMAZON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BYTEDANCE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,14 +50,14 @@ public class TypicalApplications {
             .withApplicationDate("2026-01-09").withUrl("http://ida.example.com").build();
 
     // Manually added - Application's details found in {@code CommandTestUtil}
-    public static final Application AMY = new ApplicationBuilder().withCompany(VALID_COMPANY_AMY)
-            .withRole(VALID_ROLE_AMY)
-            .withApplicationDate(VALID_APPLICATION_DATE_AMY).withUrl(VALID_URL_AMY)
-            .withStatus(VALID_STATUS_AMY).build();
-    public static final Application BOB = new ApplicationBuilder().withCompany(VALID_COMPANY_BOB)
-            .withRole(VALID_ROLE_BOB)
-            .withApplicationDate(VALID_APPLICATION_DATE_BOB).withUrl(VALID_URL_BOB)
-            .withStatus(VALID_STATUS_BOB).build();
+    public static final Application AMY = new ApplicationBuilder().withCompany(VALID_COMPANY_AMAZON)
+            .withRole(VALID_ROLE_AMAZON)
+            .withApplicationDate(VALID_APPLICATION_DATE_AMAZON).withUrl(VALID_URL_AMAZON)
+            .withStatus(VALID_STATUS_AMAZON).build();
+    public static final Application BOB = new ApplicationBuilder().withCompany(VALID_COMPANY_BYTEDANCE)
+            .withRole(VALID_ROLE_BYTEDANCE)
+            .withApplicationDate(VALID_APPLICATION_DATE_BYTEDANCE).withUrl(VALID_URL_BYTEDANCE)
+            .withStatus(VALID_STATUS_BYTEDANCE).build();
 
     // Shared fixtures for commands that operate on terminal statuses.
     public static final Application REJECTED_APPLICATION = new ApplicationBuilder()

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
@@ -26,31 +27,35 @@ import seedu.address.testutil.EditApplicationDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_COMPANY_AMY = "Amazon";
-    public static final String VALID_COMPANY_BOB = "ByteDance";
-    public static final String VALID_ROLE_AMY = "Software Engineer Intern";
-    public static final String VALID_ROLE_BOB = "Data Analyst Intern";
-    public static final String VALID_APPLICATION_DATE_AMY = "2026-03-09";
-    public static final String VALID_APPLICATION_DATE_BOB = "2026-03-10";
-    public static final String VALID_URL_AMY = "http://amy.example.com";
-    public static final String VALID_URL_BOB = "http://bob.example.com";
-    public static final String VALID_STATUS_AMY = "Applied";
-    public static final String VALID_STATUS_BOB = "Interview";
+    public static final String VALID_COMPANY_AMAZON = "Amazon";
+    public static final String VALID_COMPANY_BYTEDANCE = "ByteDance";
+    public static final String VALID_ROLE_AMAZON = "Software Engineer Intern";
+    public static final String VALID_ROLE_BYTEDANCE = "Data Analyst Intern";
+    public static final String VALID_APPLICATION_DATE_AMAZON = "2026-03-09";
+    public static final String VALID_APPLICATION_DATE_BYTEDANCE = "2026-03-10";
+    public static final String VALID_URL_AMAZON = "http://amy.example.com";
+    public static final String VALID_URL_BYTEDANCE = "http://bob.example.com";
+    public static final String VALID_STATUS_AMAZON = "Applied";
+    public static final String VALID_STATUS_BYTEDANCE = "Interview";
+    public static final String VALID_NOTE_AMAZON = "Follow up next Monday.";
+    public static final String VALID_NOTE_BYTEDANCE = "Prepare for the interview.";
 
-    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_AMY;
-    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
-    public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
-    public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
-    public static final String APPLICATION_DATE_DESC_AMY =
-            " " + PREFIX_APPLICATION_DATE + VALID_APPLICATION_DATE_AMY;
-    public static final String APPLICATION_DATE_DESC_BOB =
-            " " + PREFIX_APPLICATION_DATE + VALID_APPLICATION_DATE_BOB;
-    public static final String URL_DESC_AMY = " " + PREFIX_URL + VALID_URL_AMY;
-    public static final String URL_DESC_BOB = " " + PREFIX_URL + VALID_URL_BOB;
-    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_AMY;
-    public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
+    public static final String COMPANY_DESC_AMAZON = " " + PREFIX_COMPANY + VALID_COMPANY_AMAZON;
+    public static final String COMPANY_DESC_BYTEDANCE = " " + PREFIX_COMPANY + VALID_COMPANY_BYTEDANCE;
+    public static final String ROLE_DESC_AMAZON = " " + PREFIX_ROLE + VALID_ROLE_AMAZON;
+    public static final String ROLE_DESC_BYTEDANCE = " " + PREFIX_ROLE + VALID_ROLE_BYTEDANCE;
+    public static final String APPLICATION_DATE_DESC_AMAZON =
+            " " + PREFIX_APPLICATION_DATE + VALID_APPLICATION_DATE_AMAZON;
+    public static final String APPLICATION_DATE_DESC_BYTEDANCE =
+            " " + PREFIX_APPLICATION_DATE + VALID_APPLICATION_DATE_BYTEDANCE;
+    public static final String URL_DESC_AMAZON = " " + PREFIX_URL + VALID_URL_AMAZON;
+    public static final String URL_DESC_BYTEDANCE = " " + PREFIX_URL + VALID_URL_BYTEDANCE;
+    public static final String STATUS_DESC_AMAZON = " " + PREFIX_STATUS + VALID_STATUS_AMAZON;
+    public static final String STATUS_DESC_BYTEDANCE = " " + PREFIX_STATUS + VALID_STATUS_BYTEDANCE;
+    public static final String NOTE_DESC_AMAZON = " " + PREFIX_NOTE + VALID_NOTE_AMAZON;
+    public static final String NOTE_DESC_BYTEDANCE = " " + PREFIX_NOTE + VALID_NOTE_BYTEDANCE;
 
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "James&";
+    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "Jetbrains&";
     // '&' not allowed in company names
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "@invalid"; // '@' not allowed in roles
     public static final String INVALID_APPLICATION_DATE_DESC =
@@ -61,16 +66,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditApplicationDescriptor DESC_AMY;
-    public static final EditCommand.EditApplicationDescriptor DESC_BOB;
+    public static final EditCommand.EditApplicationDescriptor DESC_AMAZON;
+    public static final EditCommand.EditApplicationDescriptor DESC_BYTEDANCE;
 
     static {
-        DESC_AMY = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMY)
-                .withRole(VALID_ROLE_AMY).withApplicationDate(VALID_APPLICATION_DATE_AMY)
-                .withUrl(VALID_URL_AMY).withStatus(VALID_STATUS_AMY).build();
-        DESC_BOB = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BOB)
-                .withRole(VALID_ROLE_BOB).withApplicationDate(VALID_APPLICATION_DATE_BOB)
-                .withUrl(VALID_URL_BOB).withStatus(VALID_STATUS_BOB).build();
+        DESC_AMAZON = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_AMAZON)
+                .withRole(VALID_ROLE_AMAZON).withApplicationDate(VALID_APPLICATION_DATE_AMAZON)
+                .withUrl(VALID_URL_AMAZON).withStatus(VALID_STATUS_AMAZON).build();
+        DESC_BYTEDANCE = new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BYTEDANCE)
+                .withRole(VALID_ROLE_BYTEDANCE).withApplicationDate(VALID_APPLICATION_DATE_BYTEDANCE)
+                .withUrl(VALID_URL_BYTEDANCE).withStatus(VALID_STATUS_BYTEDANCE).build();
     }
 
     /**

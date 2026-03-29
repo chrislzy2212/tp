@@ -21,17 +21,27 @@ public class Application {
     // Data fields
     private final Optional<Url> url;
     private final Status status;
+    private final Note note;
 
     /**
-     * Every field must be present and not null.
+     * Creates an {@code Application} with an empty note.
      */
     public Application(Company company, Role role, ApplicationDate applicationDate, Optional<Url> url, Status status) {
-        requireAllNonNull(company, role, applicationDate, url, status);
+        this(company, role, applicationDate, url, status, Note.EMPTY);
+    }
+
+    /**
+     * Creates an {@code Application} with all fields specified.
+     */
+    public Application(Company company, Role role, ApplicationDate applicationDate,
+            Optional<Url> url, Status status, Note note) {
+        requireAllNonNull(company, role, applicationDate, url, status, note);
         this.company = company;
         this.role = role;
         this.applicationDate = applicationDate;
         this.url = url;
         this.status = status;
+        this.note = note;
     }
 
     public Company getCompany() {
@@ -54,6 +64,10 @@ public class Application {
         return status;
     }
 
+    public Note getNote() {
+        return note;
+    }
+
     /**
      * Returns true if the application has a terminal status (Rejected or Withdrawn).
      * Terminal statuses indicate the application process has ended.
@@ -63,8 +77,8 @@ public class Application {
     }
 
     /**
-     * Returns true if both applications have the same company name.
-     * This defines a weaker notion of equality between two applications.
+     * Returns true if both applications share the same identity fields.
+     * Identity is defined by company and role.
      */
     public boolean isSameApplication(Application otherApplication) {
         if (otherApplication == this) {
@@ -78,7 +92,7 @@ public class Application {
 
     /**
      * Returns true if both applications have the same identity and data fields.
-     * This defines a stronger notion of equality between two applications.
+     * This defines a stronger notion of equality than {@link #isSameApplication(Application)}.
      */
     @Override
     public boolean equals(Object other) {
@@ -96,13 +110,14 @@ public class Application {
                 && role.equals(otherApplication.role)
                 && applicationDate.equals(otherApplication.applicationDate)
                 && url.equals(otherApplication.url)
-                && status.equals(otherApplication.status);
+                && status.equals(otherApplication.status)
+                && note.equals(otherApplication.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(company, role, applicationDate, url, status);
+        return Objects.hash(company, role, applicationDate, url, status, note);
     }
 
     @Override
@@ -113,6 +128,7 @@ public class Application {
                 .add("applicationDate", applicationDate)
                 .add("url", url)
                 .add("status", status)
+                .add("note", note)
                 .toString();
     }
 

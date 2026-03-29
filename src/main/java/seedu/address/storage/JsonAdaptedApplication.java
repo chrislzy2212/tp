@@ -9,6 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
+import seedu.address.model.application.Note;
 import seedu.address.model.application.Role;
 import seedu.address.model.application.Status;
 import seedu.address.model.application.Url;
@@ -25,6 +26,7 @@ class JsonAdaptedApplication {
     private final String applicationDate;
     private final String url;
     private final String status;
+    private final String note;
 
     /**
      * Constructs a {@code JsonAdaptedApplication} with the given application details.
@@ -33,12 +35,14 @@ class JsonAdaptedApplication {
     public JsonAdaptedApplication(@JsonProperty("company") String company, @JsonProperty("role") String role,
                                   @JsonProperty("applicationDate") String applicationDate,
                                   @JsonProperty("url") String url,
-                                  @JsonProperty("status") String status) {
+                                  @JsonProperty("status") String status,
+                                  @JsonProperty("note") String note) {
         this.company = company;
         this.role = role;
         this.applicationDate = applicationDate;
         this.url = url;
         this.status = status;
+        this.note = note;
     }
 
     /**
@@ -50,6 +54,7 @@ class JsonAdaptedApplication {
         applicationDate = source.getApplicationDate().value;
         url = source.getUrl().map(u -> u.value).orElse(null);
         status = source.getStatus().toString();
+        note = source.getNote().value;
     }
 
     /**
@@ -102,7 +107,17 @@ class JsonAdaptedApplication {
             }
         }
 
-        return new Application(modelCompany, modelRole, modelApplicationDate, modelUrl, modelStatus);
+        final Note modelNote;
+        if (note == null) {
+            modelNote = Note.EMPTY;
+        } else {
+            if (!Note.isValidNote(note)) {
+                throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+            }
+            modelNote = new Note(note);
+        }
+
+        return new Application(modelCompany, modelRole, modelApplicationDate, modelUrl, modelStatus, modelNote);
     }
 
 }

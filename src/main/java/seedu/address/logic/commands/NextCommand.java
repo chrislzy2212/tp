@@ -47,7 +47,7 @@ public class NextCommand extends Command {
         Status nextStatus = applicationToUpdate.getStatus().getNextStatus();
         Application updatedApplication = new Application(applicationToUpdate.getCompany(),
                 applicationToUpdate.getRole(), applicationToUpdate.getApplicationDate(),
-                applicationToUpdate.getUrl(), nextStatus);
+                applicationToUpdate.getUrl(), nextStatus, applicationToUpdate.getNote());
 
         model.setApplication(applicationToUpdate, updatedApplication);
         model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
