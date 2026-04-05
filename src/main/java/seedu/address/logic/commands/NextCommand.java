@@ -50,7 +50,6 @@ public class NextCommand extends Command {
                 applicationToUpdate.getUrl(), nextStatus, applicationToUpdate.getNote());
 
         model.setApplication(applicationToUpdate, updatedApplication);
-        model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
         return new CommandResult(String.format(MESSAGE_NEXT_APPLICATION_SUCCESS,
                 Messages.format(updatedApplication)));
     }

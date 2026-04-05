@@ -37,7 +37,8 @@ public class Messages {
      */
     public static String format(Application application) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(application.getCompany())
+        builder.append("Company: ")
+                .append(application.getCompany())
                 .append("; Role: ")
                 .append(application.getRole())
                 .append("; Application Date: ")
