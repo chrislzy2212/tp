@@ -13,7 +13,15 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is adapted from [AddressBook-Level3](https://se-education.org/addressbook-level3/) by the [SE-EDU initiative](https://se-education.org).
+
+LockedIn relies on the following third-party libraries/frameworks:
+
+* [JavaFX](https://openjfx.io/) for the GUI.
+* [Jackson](https://github.com/FasterXML/jackson) for JSON serialization/deserialization.
+* [JUnit 5](https://junit.org/junit5/) for automated testing.
+
+The team also used GitHub Copilot for IDE-assisted autocomplete during development.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -158,21 +166,95 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Alias feature (`alias`, `unalias`, `alias-list`)
+
+Alias support is implemented through a collaboration between `AddressBookParser`, `Model`, and `UserPrefs`:
+
+1. `AddressBookParser#parseCommand` extracts the command word and checks whether it exists in the alias map.
+1. If a mapping exists, the alias is rewritten to the corresponding built-in command word before dispatch.
+1. `AliasCommand` validates that the target command is supported and the alias itself is not a built-in command.
+1. Valid mappings are persisted via `Model#setAlias(...)`, which writes to `UserPrefs`.
+1. `UnaliasCommand` removes a mapping via `Model#removeAlias(...)`.
+1. `AliasListCommand` renders all current mappings in alphabetical order.
+
+<puml src="diagrams/AliasSequenceDiagram.puml" alt="Interactions inside Logic and Model for alias creation" />
+
+Design notes:
+
+* Aliases are stored in user preferences so they survive restarts.
+* Built-in command words cannot be reused as aliases to avoid ambiguous parsing.
+* Existing aliases can be overwritten intentionally to allow iterative user customization.
+
+### Status progression feature (`next`)
+
+`next INDEX` advances an application status using a fixed cyclic workflow defined in `Status#getNextStatus()`:
+
+`Applied -> OA -> Interview -> Offered -> Rejected -> Withdrawn -> Applied`
+
+Implementation flow:
+
+1. `NextCommandParser` parses and validates the index.
+1. `NextCommand` resolves the target application from `Model#getFilteredApplicationList()`.
+1. It computes the next status, creates an updated immutable `Application`, and persists it with `Model#setApplication(...)`.
+
+<puml src="diagrams/NextSequenceDiagram.puml" alt="Interactions inside Logic and Model for next command" />
+
+### Terminal cleanup feature (`drop`)
+
+`drop` removes only terminal applications from the currently displayed list. In LockedIn, terminal statuses are `Rejected` and `Withdrawn`.
+
+Implementation details:
+
+* `DropCommandParser` rejects any extra arguments.
+* `DropCommand` filters the current displayed list by `Application#hasTerminalStatus()`.
+* Matching entries are deleted through `Model#deleteApplication(...)`.
+* If no terminal entries are present in the current list, the command fails with a descriptive error.
+
+<puml src="diagrams/DropActivityDiagram.puml" alt="Activity flow for drop command" width="420" />
+
+### Notes feature (`note` and `clearnote`)
+
+LockedIn stores free-form notes in the immutable `Application` entity through the `Note` value object.
+
+Behavior:
+
+* `note INDEX n/TEXT` replaces the note for the target application.
+* `clearnote INDEX` resets the note to `Note.EMPTY`.
+* Both commands use index-based lookup against the filtered list and persist updates through `Model#setApplication(...)`.
+
+Validation:
+
+* `NoteCommandParser` enforces exactly one `n/` prefix and rejects empty note text.
+* `ClearNoteCommandParser` only accepts a single index argument.
+
+### Auto-save behavior and error handling
+
+The save behavior is centralized in `LogicManager#execute(...)`:
+
+1. Parse command.
+1. Execute command against `Model`.
+1. Save address book JSON.
+1. Save user preferences JSON.
+
+If file writes fail, `LogicManager` converts IO failures into user-facing `CommandException` messages, including a specific message for insufficient write permissions.
+
+### [Proposed] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+It implements the following operations:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* `VersionedAddressBook#commit()` - Saves the current address book state in history.
+* `VersionedAddressBook#undo()` - Restores the previous state from history.
+* `VersionedAddressBook#redo()` - Restores a previously undone state from history.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`, and `Model#redoAddressBook()`.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Example usage scenario:
+
+Step 1. On first launch, `VersionedAddressBook` is initialized with one state, and `currentStatePointer` points to it.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
@@ -504,6 +586,80 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
+**Use case: Advance application status**
+
+**Preconditions:**
+* At least one application is shown in the current displayed list.
+
+**MSS:**
+
+1. User wants to advance an application's status.
+2. User specifies the index of the target application.
+3. LockedIn updates the application's status to the next stage in a cyclic status sequence (`Applied -> OA -> Interview -> Offered -> Rejected -> Withdrawn -> Applied`).
+4. LockedIn shows a confirmation message with the updated application details.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The specified index is invalid.
+
+    * 2a1. LockedIn shows an error message.
+
+      Use case ends.
+
+
+**Use case: Drop terminal applications from current list**
+
+**MSS:**
+
+1. User wants to remove terminal applications from the currently displayed list.
+2. User executes the drop command.
+3. LockedIn finds applications with status `Rejected` or `Withdrawn` in the current list.
+4. LockedIn deletes those applications.
+5. LockedIn shows a summary message with the number of removed applications.
+
+   Use case ends.
+
+**Extensions:**
+
+* 3a. No terminal applications are found in the current displayed list.
+
+    * 3a1. LockedIn shows an error message indicating that there is nothing to drop.
+
+      Use case ends.
+
+
+**Use case: Set or clear an application note**
+
+**Preconditions:**
+* At least one application is shown in the current displayed list.
+
+**MSS:**
+
+1. User wants to set or clear a note for an application.
+2. User specifies the target index.
+3. User provides either note text (`note`) or requests note removal (`clearnote`).
+4. LockedIn updates the note field for the selected application.
+5. LockedIn shows a confirmation message.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The specified index is invalid.
+
+    * 2a1. LockedIn shows an error message.
+
+      Use case ends.
+
+* 3a. `note` input is empty or malformed.
+
+    * 3a1. LockedIn shows an error message with the correct command format.
+
+      Use case ends.
+
+
 **Use case: Save data**
 
 **MSS:**
@@ -543,15 +699,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on mainstream OS as long as Java 17 or above is installed.
-2.  Should be able to store and manage at least 1000 application records without noticeable sluggishness for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should automatically save data after each modifying command.
-5.  Should store data locally on the user’s device and not require Internet access for normal operation.
-6.  Is not required to automate the internship application process since it only serves as a local application logbook.
-7.  Should respond to typical commands within 2 seconds under normal usage conditions.
-
-*{More to be added}*
+1. Should work on mainstream OS as long as Java `17` or above is installed.
+2. Should be able to store and manage at least 1000 application records without noticeable sluggishness for typical usage.
+3. A user with above-average typing speed for regular English text should be able to complete core tasks (add/edit/find/delete) faster using commands than with mouse-driven workflows.
+4. All successful modifying commands should persist data automatically to local storage.
+5. The application should function without Internet connectivity for all core features.
+6. Typical commands should complete within 2 seconds under normal usage conditions.
+7. The application should fail gracefully for invalid inputs with actionable error messages.
+8. The application should preserve user aliases across restarts.
+9. The application is not required to automate internship applications; it is a local tracking/logbook tool.
 
 ### Glossary
 
@@ -560,10 +716,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Current displayed list**: The list of application records currently shown to the user, which may be the full list or a filtered subset.
 * **Index**: The 1-based position of an application record in the current displayed list.
 * **Status**: The current stage of an application, such as Applied, OA, Interview, Offered, Rejected, or Withdrawn.
+* **Terminal status**: A status that indicates the application process has ended (`Rejected` or `Withdrawn`).
 * **CLI (Command-Line Interface)**: A way of interacting with the application by typing commands.
 * **Local storage**: Data saved on the user’s own device rather than on an online server.
 * **Job URL**: A web link attached to an application record for quick access to the original job posting or company page.
 * **Alias**: A user-defined shortcut for an existing command word.
+* **Note**: Free-form text attached to an application entry for reminders and context.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -708,6 +866,55 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `unalias noSuchAlias`  
        Expected: An error message is shown.
+
+
+### Next and drop commands
+
+1. Advancing application status (`next`)
+
+    1. Prerequisites: Use the `list` command. Multiple application records in the list.
+
+    2. Test case: `next 1`  
+       Expected: The first application's status advances by one step in the fixed cycle (`Applied -> OA -> Interview -> Offered -> Rejected -> Withdrawn -> Applied`).
+
+    3. Test case: Execute `next 1` repeatedly after status becomes `Withdrawn`.  
+       Expected: The next update cycles status back to `Applied`.
+
+    4. Test case: `next 0`  
+       Expected: No application is updated. An error message is shown.
+
+2. Dropping terminal applications (`drop`)
+
+    1. Prerequisites: Current displayed list contains at least one application with status `Rejected` or `Withdrawn`.
+
+    2. Test case: `drop`  
+       Expected: All `Rejected`/`Withdrawn` applications in the current list are deleted, and a summary is shown.
+
+    3. Test case: `drop now`  
+       Expected: No deletion occurs. An error message is shown because `drop` does not accept arguments.
+
+
+### Notes commands
+
+1. Setting notes (`note`)
+
+    1. Prerequisites: At least one application exists.
+
+    2. Test case: `note 1 n/Prepare for OA this weekend.`  
+       Expected: Note field for the first application is updated.
+
+    3. Test case: `note 1 n/`  
+       Expected: No note is saved. An error message is shown.
+
+2. Clearing notes (`clearnote`)
+
+    1. Prerequisites: At least one application has a non-empty note.
+
+    2. Test case: `clearnote 1`  
+       Expected: Note for the first application is removed.
+
+    3. Test case: `clearnote 1 extra`  
+       Expected: Command is rejected as invalid format.
 
 
 ### Saving data

@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes drop;
+
+if (Any extra arguments?) then (yes)
+  :Show parser error;
+  stop
+else (no)
+endif
+
+:Read current filtered list;
+:Select entries with terminal status
+(Rejected or Withdrawn);
+
+if (Any matching entries?) then (no)
+  :Show "nothing to drop" error;
+  stop
+else (yes)
+endif
+
+:Delete all matching entries;
+:Show summary + dropped entries;
+stop
+@enduml
