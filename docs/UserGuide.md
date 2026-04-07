@@ -236,6 +236,32 @@ If you omit `s/STATUS`, LockedIn uses `Applied` as the default status.
 - The new application is added to the list.
 
 ---
+<a id="note"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+Add a note to an application: <code>note</code>
+</h3>
+
+Adds a note to an existing application in LockedIn.
+
+**Format:** `note INDEX nt/NOTE`
+
+**Notes**
+- `INDEX` refers to the index number shown in the displayed list.
+- `INDEX` must be a positive integer.
+- `NOTE` can contain letters, numbers, spaces, and symbols, and must not be blank.
+- If the selected application already has a note, the existing note is replaced by the new note.
+- Notes can be used to store reminders, interview details, recruiter names, deadlines, or any other application-related information.
+
+**Examples**
+- `note 1 nt/Submitted resume through referral`
+- `note 2 nt/OA deadline is 2025-03-15`
+- `note 3 nt/Recruiter mentioned response within 2 weeks`
+
+**What you should expect**
+- A success message appears.
+- The selected application's note is updated.
+
+---
 
 <a id="list"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
