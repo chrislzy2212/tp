@@ -57,6 +57,19 @@ public class AliasCommandTest {
     }
 
     @Test
+    public void execute_existingAliasSameCommand_showsDuplicateMessage() throws Exception {
+        Model model = new ModelManager();
+        model.setAlias("ls", "list");
+
+        AliasCommand command = new AliasCommand("ls", "list");
+        CommandResult result = command.execute(model);
+
+        assertEquals(String.format(AliasCommand.MESSAGE_DUPLICATE_ALIAS,
+                "ls", "list"), result.getFeedbackToUser());
+        assertEquals("list", model.getAliases().get("ls"));
+    }
+
+    @Test
     public void equals() {
         AliasCommand firstCommand = new AliasCommand("ls", "list");
         AliasCommand secondCommand = new AliasCommand("ls", "copy");
