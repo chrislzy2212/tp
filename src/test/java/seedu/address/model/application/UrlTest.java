@@ -28,6 +28,10 @@ public class UrlTest {
         // invalid urls
         assertFalse(Url.isValidUrl("")); // empty string
         assertFalse(Url.isValidUrl(" ")); // spaces only
+        assertFalse(Url.isValidUrl("google.com")); // missing protocol
+        assertFalse(Url.isValidUrl("www.google.com")); // missing protocol
+        assertFalse(Url.isValidUrl("ftp://example.com")); // wrong protocol
+        assertFalse(Url.isValidUrl("https:// hello.com")); // space after protocol
 
         // valid urls
         assertTrue(Url.isValidUrl("https://www.google.com"));

@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Url {
 
-    public static final String MESSAGE_CONSTRAINTS = "URLs can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "URL must start with http:// or https://, must not be blank, "
+                    + "and must not contain spaces";
 
     /*
      * The first character of the URL must not be a whitespace and starts with http or https,
@@ -48,7 +50,6 @@ public class Url {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Url)) {
             return false;
         }
@@ -61,5 +62,4 @@ public class Url {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

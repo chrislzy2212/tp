@@ -29,7 +29,7 @@ public class ApplicationUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_COMPANY + application.getCompany().value + " ");
         sb.append(PREFIX_ROLE + application.getRole().value + " ");
-        sb.append(PREFIX_APPLICATION_DATE + application.getApplicationDate().value + " ");
+        sb.append(PREFIX_APPLICATION_DATE).append(application.getApplicationDate().toString()).append(" ");
         application.getUrl().ifPresent(url -> sb.append(PREFIX_URL + url.value + " "));
         sb.append(PREFIX_STATUS + application.getStatus().toString() + " ");
         return sb.toString();
@@ -43,7 +43,7 @@ public class ApplicationUtil {
         descriptor.getCompany().ifPresent(company -> sb.append(PREFIX_COMPANY).append(company.value).append(" "));
         descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.value).append(" "));
         descriptor.getApplicationDate().ifPresent(applicationDate ->
-                sb.append(PREFIX_APPLICATION_DATE).append(applicationDate.value).append(" "));
+                sb.append(PREFIX_APPLICATION_DATE).append(applicationDate.toString()).append(" "));
         descriptor.getUrl().ifPresent(url -> sb.append(PREFIX_URL).append(url.value).append(" "));
         descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status).append(" "));
         return sb.toString();

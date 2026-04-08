@@ -55,9 +55,9 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_AMAZON = " " + PREFIX_NOTE + VALID_NOTE_AMAZON;
     public static final String NOTE_DESC_BYTEDANCE = " " + PREFIX_NOTE + VALID_NOTE_BYTEDANCE;
 
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "Jetbrains&";
+    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY;
     // '&' not allowed in company names
-    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "@invalid"; // '@' not allowed in roles
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE; // '@' not allowed in roles
     public static final String INVALID_APPLICATION_DATE_DESC =
             " " + PREFIX_APPLICATION_DATE + "2026/03/09"; // '/' symbol not allowed
     public static final String INVALID_URL_DESC = " " + PREFIX_URL + "invalid-url"; // invalid URL format

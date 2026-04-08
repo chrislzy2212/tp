@@ -203,7 +203,7 @@ Adds a new application to LockedIn.
 |------------------------------------|---------------------------------|
 | ![beforeAdd](images/beforeAdd.png) | ![afterAdd](images/afterAdd.png) |
 
-**Format:** `add n/COMPANY r/ROLE d/APPLICATION_DATE [u/URL] [s/STATUS]`
+**Format:** `add n/COMPANY r/ROLE [d/APPLICATION_DATE] [u/URL] [s/STATUS]`
 
 **Field meaning**
 - `COMPANY` — company name
@@ -213,9 +213,10 @@ Adds a new application to LockedIn.
 - `STATUS` — current application stage
 
 **Notes**
-- `COMPANY` and `ROLE` must contain only alphanumeric characters and spaces, and must not be blank.
+- `COMPANY` and `ROLE` can contain letters, numbers, spaces, and symbols, and must not be blank.
 - Company and role comparisons are case-insensitive. For example, `Google` and `GOOGLE` are treated as the same company.
 - `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
+- If `d/APPLICATION_DATE` is omitted, LockedIn uses the current date by default.
 - `URL`, if provided, must start with `http://` or `https://`.
 - Duplicate applications have the same company (case-insensitive), role (case-insensitive), and application date. LockedIn will reject duplicate applications.
 
@@ -274,7 +275,7 @@ Edits an existing application in LockedIn.
 - `INDEX` must be a positive integer such as `1`, `2`, or `3`.
 - You must provide at least one field to edit.
 - Existing values are updated to the input values.
-- `COMPANY` and `ROLE` must contain only alphanumeric characters and spaces, and must not be blank.
+- `COMPANY` and `ROLE` can contain letters, numbers, spaces, and symbols, and must not be blank.
 - `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
 - `URL`, if provided, must start with `http://` or `https://`.
 

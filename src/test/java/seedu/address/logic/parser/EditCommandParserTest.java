@@ -91,8 +91,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ROLE_DESC + APPLICATION_DATE_DESC_AMAZON, Role.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_COMPANY_DESC + INVALID_APPLICATION_DATE_DESC + VALID_URL_AMAZON
-                        + VALID_ROLE_AMAZON,
+        assertParseFailure(parser,
+                "1" + INVALID_COMPANY_DESC + INVALID_APPLICATION_DATE_DESC + URL_DESC_AMAZON + ROLE_DESC_AMAZON,
                 Company.MESSAGE_CONSTRAINTS);
     }
 

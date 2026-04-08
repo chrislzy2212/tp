@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY, PREFIX_ROLE, PREFIX_APPLICATION_DATE, PREFIX_URL,
                         PREFIX_STATUS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_ROLE, PREFIX_APPLICATION_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_ROLE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -43,8 +43,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_STATUS);
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-        ApplicationDate applicationDate = ParserUtil.parseApplicationDate(
-                argMultimap.getValue(PREFIX_APPLICATION_DATE).get());
+
+        ApplicationDate applicationDate = argMultimap.getValue(PREFIX_APPLICATION_DATE).isPresent()
+                ? ParserUtil.parseApplicationDate(argMultimap.getValue(PREFIX_APPLICATION_DATE).get())
+                : new ApplicationDate();
+
         Optional<String> urlvalue = argMultimap.getValue(PREFIX_URL);
         Optional<Url> url = urlvalue.isPresent() ? Optional.of(ParserUtil.parseUrl(urlvalue.get())) : Optional.empty();
         Optional<String> statusValue = argMultimap.getValue(PREFIX_STATUS);
