@@ -1,0 +1,9 @@
+@startuml
+enum Status {
+  APPLIED
+  OA
+  INTERVIEW
+}
+class Application
+Application --> Status
+@enduml
