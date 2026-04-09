@@ -52,12 +52,12 @@ public class ClearNoteCommandTest {
         assertCommandSuccess(clearNoteCommand, model, expectedMessage, expectedModel);
     }
 
-        @Test
-        public void execute_emptyNote_throwsCommandException() {
+    @Test
+    public void execute_emptyNote_throwsCommandException() {
         ClearNoteCommand clearNoteCommand = new ClearNoteCommand(INDEX_FIRST_APPLICATION);
 
         assertCommandFailure(clearNoteCommand, model, ClearNoteCommand.MESSAGE_APPLICATION_NOTE_ALREADY_EMPTY);
-        }
+    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
