@@ -238,6 +238,8 @@ If you omit `s/STATUS`, LockedIn uses `Applied` as the default status.
 
 ---
 
+
+
 <a id="list"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
 List all applications: <code>list</code>
@@ -470,6 +472,34 @@ After using `find`, use `list` to return to the full application list.
 
 ---
 
+<a id="clearnote"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+Clear an application note: <code>clearnote</code>
+</h3>
+
+Clears the note of the specified application in LockedIn.
+
+| Before                                         | After                                        |
+|------------------------------------------------|----------------------------------------------|
+| ![beforeClearNote](images/beforeClearNote.png) | ![afterClearNote](images/afterClearNote.png) |
+
+**Format:** `clearnote INDEX`
+
+**Notes**
+- `INDEX` refers to the index number shown in the displayed list.
+- `INDEX` must be a positive integer.
+- The selected application's note is reset to an empty note.
+
+**Examples**
+- `clearnote 1`
+- `find n/Google` followed by `clearnote 1`
+
+**What you should expect**
+- The selected application's note is cleared.
+- A success message appears.
+
+---
+
 <a id="delete"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
 Delete an application: <code>delete</code>
@@ -612,7 +642,7 @@ A: Use the format `yyyy-MM-dd`. For example, `2025-02-14`.
 <br>
 
 **Q: What does `INDEX` mean?**<br>
-A: `INDEX` is the number shown next to an application in the current displayed list. Use it for commands like `edit`, `delete`, `next`, and `copy`.
+A: `INDEX` is the number shown next to an application in the current displayed list. Use it for commands like `edit`, `delete`, `next`, `copy`, and `clearnote`.
 
 <br>
 
@@ -698,6 +728,7 @@ A: Install LockedIn on the other computer and replace the empty data file it cre
 | **Alias** | `alias ALIAS COMMAND_WORD` | `alias ls list` |
 | **Alias List** | `alias-list` | `alias-list` |
 | **Clear** | `clear` | `clear` |
+| **Clear Note** | `clearnote INDEX` | `clearnote 1` |
 | **Copy** | `copy INDEX` | `copy 3` |
 | **Delete** | `delete INDEX` | `delete 3` |
 | **Drop** | `drop` | `drop` |
