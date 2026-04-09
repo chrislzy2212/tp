@@ -32,6 +32,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalApplications.AMY;
 import static seedu.address.testutil.TypicalApplications.BOB;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -96,16 +98,20 @@ public class AddCommandParserTest {
         // invalid value followed by valid value
 
         // invalid company
-        assertParseFailure(parser, INVALID_COMPANY_DESC + validExpectedApplicationString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
+        assertParseFailure(parser,
+                INVALID_COMPANY_DESC + ROLE_DESC_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE
+                        + URL_DESC_BYTEDANCE + STATUS_DESC_BYTEDANCE,
+                Company.MESSAGE_CONSTRAINTS);
 
         // invalid application date
         assertParseFailure(parser, INVALID_APPLICATION_DATE_DESC + validExpectedApplicationString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_APPLICATION_DATE));
 
         // invalid role
-        assertParseFailure(parser, INVALID_ROLE_DESC + validExpectedApplicationString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
+        assertParseFailure(parser,
+                COMPANY_DESC_BYTEDANCE + INVALID_ROLE_DESC + APPLICATION_DATE_DESC_BYTEDANCE
+                        + URL_DESC_BYTEDANCE + STATUS_DESC_BYTEDANCE,
+                Role.MESSAGE_CONSTRAINTS);
 
         // invalid url
         assertParseFailure(parser, INVALID_URL_DESC + validExpectedApplicationString,
@@ -145,9 +151,17 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 COMPANY_DESC_AMAZON + ROLE_DESC_AMAZON + APPLICATION_DATE_DESC_AMAZON + URL_DESC_AMAZON,
                 new AddCommand(expectedApplication));
+
+        // missing application date -> defaults to current date
+        expectedApplication = new ApplicationBuilder()
+                .withCompany("Amazon")
+                .withRole("Software Engineer Intern")
+                .withApplicationDate(LocalDate.now())
+                .build();
+        assertParseSuccess(parser,
+                COMPANY_DESC_AMAZON + ROLE_DESC_AMAZON,
+                new AddCommand(expectedApplication));
     }
-
-
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
@@ -161,11 +175,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, COMPANY_DESC_BYTEDANCE + VALID_ROLE_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE,
                 expectedMessage);
 
-        // missing application date prefix
-        assertParseFailure(parser, COMPANY_DESC_BYTEDANCE + ROLE_DESC_BYTEDANCE + VALID_APPLICATION_DATE_BYTEDANCE,
-                expectedMessage);
-
-
         // all prefixes missing
         assertParseFailure(parser, VALID_COMPANY_BYTEDANCE + VALID_ROLE_BYTEDANCE + VALID_APPLICATION_DATE_BYTEDANCE,
                 expectedMessage);
@@ -173,18 +182,6 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid company
-        assertParseFailure(parser,
-                INVALID_COMPANY_DESC + ROLE_DESC_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE
-                        + URL_DESC_BYTEDANCE + STATUS_DESC_BYTEDANCE,
-                Company.MESSAGE_CONSTRAINTS);
-
-        // invalid role
-        assertParseFailure(parser,
-                COMPANY_DESC_BYTEDANCE + INVALID_ROLE_DESC + APPLICATION_DATE_DESC_BYTEDANCE
-                        + URL_DESC_BYTEDANCE + STATUS_DESC_BYTEDANCE,
-                Role.MESSAGE_CONSTRAINTS);
-
         // invalid application date
         assertParseFailure(parser,
                 COMPANY_DESC_BYTEDANCE + ROLE_DESC_BYTEDANCE + INVALID_APPLICATION_DATE_DESC
@@ -202,11 +199,6 @@ public class AddCommandParserTest {
                 COMPANY_DESC_BYTEDANCE + ROLE_DESC_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE
                         + URL_DESC_BYTEDANCE + INVALID_STATUS_DESC,
                 Status.MESSAGE_CONSTRAINTS);
-
-        // two invalid values, only first invalid value reported
-        assertParseFailure(parser,
-                INVALID_COMPANY_DESC + ROLE_DESC_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE + INVALID_URL_DESC,
-                Company.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser,

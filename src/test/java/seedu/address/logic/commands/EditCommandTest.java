@@ -98,16 +98,17 @@ public class EditCommandTest {
         Application applicationInFilteredList = model.getFilteredApplicationList()
                 .get(INDEX_FIRST_APPLICATION.getZeroBased());
         Application editedApplication = new ApplicationBuilder(applicationInFilteredList)
-                .withCompany(VALID_COMPANY_BYTEDANCE)
+                .withRole(VALID_ROLE_BYTEDANCE)
                 .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICATION,
-                new EditApplicationDescriptorBuilder().withCompany(VALID_COMPANY_BYTEDANCE).build());
+                new EditApplicationDescriptorBuilder().withRole(VALID_ROLE_BYTEDANCE).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICATION_SUCCESS,
                 Messages.format(editedApplication));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setApplication(model.getFilteredApplicationList().get(0), editedApplication);
+        expectedModel.setApplication(applicationInFilteredList, editedApplication);
+        showApplicationAtIndex(expectedModel, INDEX_FIRST_APPLICATION);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

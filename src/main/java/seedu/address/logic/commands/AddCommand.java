@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_ROLE + "ROLE "
-            + PREFIX_APPLICATION_DATE + "APPLICATION_DATE "
+            + "[" + PREFIX_APPLICATION_DATE + "APPLICATION_DATE] "
             + "[" + PREFIX_URL + "URL] "
             + "[" + PREFIX_STATUS + "STATUS]\n"
             + "Example: " + COMMAND_WORD + " "

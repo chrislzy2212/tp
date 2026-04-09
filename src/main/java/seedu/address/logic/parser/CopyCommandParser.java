@@ -21,8 +21,13 @@ public class CopyCommandParser implements Parser<CopyCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new CopyCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopyCommand.MESSAGE_USAGE), pe);
+
+            if (args.trim().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopyCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw pe;
+            }
         }
     }
 

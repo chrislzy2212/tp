@@ -16,15 +16,15 @@ import seedu.address.model.application.Status;
 import seedu.address.model.application.Url;
 
 public class ParserUtilTest {
-    private static final String INVALID_COMPANY = "R@chel";
-    private static final String INVALID_ROLE = "+651234";
+    private static final String INVALID_COMPANY = "Google😀";
+    private static final String INVALID_ROLE = "工程师";
     private static final String INVALID_URL = "invalid_url";
     private static final String INVALID_APPLICATION_DATE = "2026/03/09";
     private static final String INVALID_STATUS = "Pending";
     private static final String INVALID_NOTE = "a".repeat(201);
 
-    private static final String VALID_COMPANY = "Rachel Walker";
-    private static final String VALID_ROLE = "123456";
+    private static final String VALID_COMPANY = "Rachel  Walker & Co.";
+    private static final String VALID_ROLE = "QA   Engineer";
     private static final String VALID_URL = "https://www.rachelwalker.com";
     private static final String VALID_APPLICATION_DATE = "2026-03-09";
     private static final String VALID_STATUS = "Interview";
@@ -73,6 +73,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCompany_invalidCharacters_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCompany("Google😀"));
+    }
+
+    @Test
     public void parseRole_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRole((String) null));
     }
@@ -93,6 +98,11 @@ public class ParserUtilTest {
         String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
         Role expectedRole = new Role(VALID_ROLE);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
+    public void parseRole_invalidCharacters_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole("工程师"));
     }
 
     @Test

@@ -48,7 +48,7 @@ public class ApplicationContainsKeywordsPredicate implements Predicate<Applicati
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(application.getRole().value, keyword));
 
         boolean matchesApplicationDate = applicationDateKeywords.isEmpty() || applicationDateKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(application.getApplicationDate().value,
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(application.getApplicationDate().toString(),
                         keyword));
 
         boolean matchesStatus = statusKeywords.isEmpty() || statusKeywords.stream()

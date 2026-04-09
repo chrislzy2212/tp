@@ -31,7 +31,18 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NOTE);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+
+            if (argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw pe;
+            }
+        }
 
         String noteValue = argMultimap.getValue(PREFIX_NOTE).get().trim();
         if (noteValue.isEmpty()) {

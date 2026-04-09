@@ -16,8 +16,8 @@ import seedu.address.model.application.Status;
 import seedu.address.model.application.Url;
 
 public class JsonAdaptedApplicationTest {
-    private static final String INVALID_COMPANY = "R@chel";
-    private static final String INVALID_ROLE = "@Engineer";
+    private static final String INVALID_COMPANY = "";
+    private static final String INVALID_ROLE = "";
     private static final String INVALID_URL = "invalid_url";
     private static final String INVALID_APPLICATION_DATE = "2026/03/09";
     private static final String INVALID_STATUS = "Pending";

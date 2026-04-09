@@ -25,8 +25,18 @@ public class ClearNoteCommandParser implements Parser<ClearNoteCommand> {
         if (args.trim().isEmpty() || args.trim().split("\\s+").length > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearNoteCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(args);
-        return new ClearNoteCommand(index);
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new ClearNoteCommand(index);
+        } catch (ParseException pe) {
+
+            if (args.trim().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearNoteCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw pe;
+            }
+        }
 
     }
 }

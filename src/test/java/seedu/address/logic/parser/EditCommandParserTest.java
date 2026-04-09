@@ -28,6 +28,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_APPLICATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_APPLICATION;
@@ -55,7 +56,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_COMPANY_AMAZON, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, COMPANY_DESC_AMAZON, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -67,16 +68,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + COMPANY_DESC_AMAZON, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + COMPANY_DESC_AMAZON, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + COMPANY_DESC_AMAZON, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + COMPANY_DESC_AMAZON, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -91,8 +92,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ROLE_DESC + APPLICATION_DATE_DESC_AMAZON, Role.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_COMPANY_DESC + INVALID_APPLICATION_DATE_DESC + VALID_URL_AMAZON
-                        + VALID_ROLE_AMAZON,
+        assertParseFailure(parser,
+                "1" + INVALID_COMPANY_DESC + INVALID_APPLICATION_DATE_DESC + URL_DESC_AMAZON + ROLE_DESC_AMAZON,
                 Company.MESSAGE_CONSTRAINTS);
     }
 

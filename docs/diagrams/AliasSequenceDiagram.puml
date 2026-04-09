@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AliasCommandParser" as AliasCommandParser LOGIC_COLOR
+participant "a:AliasCommand" as AliasCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("alias ls list")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("alias ls list")
+activate AddressBookParser
+
+create AliasCommandParser
+AddressBookParser -> AliasCommandParser
+activate AliasCommandParser
+
+AddressBookParser -> AliasCommandParser : parse(" ls list")
+create AliasCommand
+AliasCommandParser -> AliasCommand
+activate AliasCommand
+AliasCommand --> AliasCommandParser
+deactivate AliasCommand
+AliasCommandParser --> AddressBookParser : a
+deactivate AliasCommandParser
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AliasCommand : execute(m)
+activate AliasCommand
+AliasCommand -> Model : hasAlias("ls")
+activate Model
+Model --> AliasCommand : false
+deactivate Model
+
+AliasCommand -> Model : setAlias("ls", "list")
+activate Model
+Model --> AliasCommand
+deactivate Model
+
+create CommandResult
+AliasCommand -> CommandResult
+activate CommandResult
+CommandResult --> AliasCommand
+deactivate CommandResult
+
+AliasCommand --> LogicManager : r
+deactivate AliasCommand
+
+LogicManager -> Storage : saveAddressBook(...)
+activate Storage
+Storage --> LogicManager
+deactivate Storage
+
+LogicManager -> Storage : saveUserPrefs(...)
+activate Storage
+Storage --> LogicManager
+deactivate Storage
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

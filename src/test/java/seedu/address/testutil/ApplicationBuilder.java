@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import seedu.address.model.application.Application;
@@ -87,6 +88,14 @@ public class ApplicationBuilder {
      * Sets the {@code ApplicationDate} of the {@code Application} that we are building.
      */
     public ApplicationBuilder withApplicationDate(String applicationDate) {
+        this.applicationDate = new ApplicationDate(applicationDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ApplicationDate} of the {@code Application} that we are building.
+     */
+    public ApplicationBuilder withApplicationDate(LocalDate applicationDate) {
         this.applicationDate = new ApplicationDate(applicationDate);
         return this;
     }

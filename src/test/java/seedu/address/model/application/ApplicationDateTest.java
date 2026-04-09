@@ -1,8 +1,11 @@
 package seedu.address.model.application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +13,28 @@ public class ApplicationDateTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ApplicationDate(null));
+        assertThrows(NullPointerException.class, () -> new ApplicationDate((String) null));
     }
 
     @Test
     public void constructor_invalidApplicationDate_throwsIllegalArgumentException() {
         String invalidApplicationDate = "";
         assertThrows(IllegalArgumentException.class, () -> new ApplicationDate(invalidApplicationDate));
+    }
+
+    @Test
+    public void constructor_noArguments_setsCurrentDate() {
+        ApplicationDate applicationDate = new ApplicationDate();
+        assertEquals(LocalDate.now(), applicationDate.getValue());
+    }
+
+    @Test
+    public void constructor_localDate_storesDateCorrectly() {
+        LocalDate date = LocalDate.of(2026, 3, 9);
+        ApplicationDate applicationDate = new ApplicationDate(date);
+
+        assertEquals(date, applicationDate.getValue());
+        assertEquals("2026-03-09", applicationDate.toString());
     }
 
     @Test

@@ -56,7 +56,7 @@ public class ApplicationCard extends UiPart<Region> {
         role.setText(application.getRole().value);
         status.setText(application.getStatus().toString());
         url.setText(application.getUrl().map(u -> u.value).orElse("url: -"));
-        applicationDate.setText(application.getApplicationDate().value);
+        applicationDate.setText(application.getApplicationDate().toString());
         note.setText(application.getNote().toString().isEmpty() ? "-" : application.getNote().toString());
 
         String statusClass = getStatusStyleClass(application);

@@ -160,8 +160,13 @@ Notes about the command format
 
 - Extra words for commands that do not take parameters, such as `help`, `list`, and `exit` are ignored.
   Example: `help 123` is treated as `help`.
+
 - Commands like `clear` and `drop` do not accept any arguments. Using arguments will result in an error.
   Example: `clear 4` will show an error message.
+
+- Leading and trailing spaces around field values are ignored.
+  Example: `add n/  Google   r/  Software Engineer  ` is treated the same as
+  `add n/Google r/Software Engineer`.
 
 - If you are using a PDF version of this document, be careful when copying commands that wrap across multiple lines. Spaces around line breaks may be omitted when pasted into the app.
 
@@ -203,7 +208,7 @@ Adds a new application to LockedIn.
 |------------------------------------|---------------------------------|
 | ![beforeAdd](images/beforeAdd.png) | ![afterAdd](images/afterAdd.png) |
 
-**Format:** `add n/COMPANY r/ROLE d/APPLICATION_DATE [u/URL] [s/STATUS]`
+**Format:** `add n/COMPANY r/ROLE [d/APPLICATION_DATE] [u/URL] [s/STATUS]`
 
 **Field meaning**
 - `COMPANY` — company name
@@ -213,9 +218,12 @@ Adds a new application to LockedIn.
 - `STATUS` — current application stage
 
 **Notes**
-- `COMPANY` and `ROLE` must contain only alphanumeric characters and spaces, and must not be blank.
+- `COMPANY` and `ROLE` can contain English letters, numbers, spaces, and these symbols:
+  `` ` ~ ! @ # $ % ^ & * ( ) - _ = + [ { ] } \ | ; : ' " , < . > / ? ``
+- `COMPANY` and `ROLE` must not be blank.
 - Company and role comparisons are case-insensitive. For example, `Google` and `GOOGLE` are treated as the same company.
 - `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
+- If `d/APPLICATION_DATE` is omitted, LockedIn uses the current date by default.
 - `URL`, if provided, must start with `http://` or `https://`.
 - Duplicate applications have the same company (case-insensitive), role (case-insensitive), and application date. LockedIn will reject duplicate applications.
 
@@ -263,6 +271,8 @@ Adds a note to an existing application in LockedIn.
 
 ---
 
+
+
 <a id="list"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
 List all applications: <code>list</code>
@@ -300,7 +310,9 @@ Edits an existing application in LockedIn.
 - `INDEX` must be a positive integer such as `1`, `2`, or `3`.
 - You must provide at least one field to edit.
 - Existing values are updated to the input values.
-- `COMPANY` and `ROLE` must contain only alphanumeric characters and spaces, and must not be blank.
+- `COMPANY` and `ROLE` can contain English letters, numbers, spaces, and these symbols:
+  `` ` ~ ! @ # $ % ^ & * ( ) - _ = + [ { ] } \ | ; : ' " , < . > / ? ``
+- `COMPANY` and `ROLE` must not be blank.
 - `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
 - `URL`, if provided, must start with `http://` or `https://`.
 
@@ -495,6 +507,34 @@ After using `find`, use `list` to return to the full application list.
 
 ---
 
+<a id="clearnote"></a>
+<h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
+Clear an application note: <code>clearnote</code>
+</h3>
+
+Clears the note of the specified application in LockedIn.
+
+| Before                                         | After                                        |
+|------------------------------------------------|----------------------------------------------|
+| ![beforeClearNote](images/beforeClearNote.png) | ![afterClearNote](images/afterClearNote.png) |
+
+**Format:** `clearnote INDEX`
+
+**Notes**
+- `INDEX` refers to the index number shown in the displayed list.
+- `INDEX` must be a positive integer.
+- The selected application's note is reset to an empty note.
+
+**Examples**
+- `clearnote 1`
+- `find n/Google` followed by `clearnote 1`
+
+**What you should expect**
+- The selected application's note is cleared.
+- A success message appears.
+
+---
+
 <a id="delete"></a>
 <h3 style="font-size: 1.3em; color: #d9730d; margin-top: 1.2em; margin-bottom: 0.4em;">
 Delete an application: <code>delete</code>
@@ -631,13 +671,16 @@ Before editing the data file:
 ## <span style="color:#4a90e2;">FAQ</span>
 <br>
 
+**Q: Can I use emoji or non-English characters in company and role names?**  
+A: No. LockedIn currently supports only English letters, numbers, spaces, and a fixed set of symbols for `COMPANY` and `ROLE`.
+
 **Q: What date format should I use?**<br>
 A: Use the format `yyyy-MM-dd`. For example, `2025-02-14`.
 
 <br>
 
 **Q: What does `INDEX` mean?**<br>
-A: `INDEX` is the number shown next to an application in the current displayed list. Use it for commands like `edit`, `delete`, `next`, and `copy`.
+A: `INDEX` is the number shown next to an application in the current displayed list. Use it for commands like `edit`, `delete`, `next`, `copy`, and `clearnote`.
 
 <br>
 
@@ -723,6 +766,7 @@ A: Install LockedIn on the other computer and replace the empty data file it cre
 | **Alias** | `alias ALIAS COMMAND_WORD` | `alias ls list` |
 | **Alias List** | `alias-list` | `alias-list` |
 | **Clear** | `clear` | `clear` |
+| **Clear Note** | `clearnote INDEX` | `clearnote 1` |
 | **Copy** | `copy INDEX` | `copy 3` |
 | **Delete** | `delete INDEX` | `delete 3` |
 | **Drop** | `drop` | `drop` |

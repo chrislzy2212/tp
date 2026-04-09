@@ -16,16 +16,33 @@ public class ApplicationDate {
             "Application date should be a valid date in the format yyyy-MM-dd, "
                     + "for example, 2026-03-09";
 
-    public final String value;
+    private final LocalDate value;
 
     /**
-     * Constructs an {@code ApplicationDate}.
+     * Constructs an {@code ApplicationDate} using the current date.
+     */
+    public ApplicationDate() {
+        value = LocalDate.now();
+    }
+
+    /**
+     * Constructs an {@code ApplicationDate} from a valid date string.
      *
-     * @param applicationDate A valid application date.
+     * @param applicationDate A valid application date in yyyy-MM-dd format.
      */
     public ApplicationDate(String applicationDate) {
         requireNonNull(applicationDate);
         checkArgument(isValidApplicationDate(applicationDate), MESSAGE_CONSTRAINTS);
+        value = LocalDate.parse(applicationDate);
+    }
+
+    /**
+     * Constructs an {@code ApplicationDate} from a {@code LocalDate}.
+     *
+     * @param applicationDate A non-null application date.
+     */
+    public ApplicationDate(LocalDate applicationDate) {
+        requireNonNull(applicationDate);
         value = applicationDate;
     }
 
@@ -43,9 +60,16 @@ public class ApplicationDate {
         }
     }
 
+    /**
+     * Returns the underlying {@code LocalDate}.
+     */
+    public LocalDate getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override

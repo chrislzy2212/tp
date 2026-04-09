@@ -46,6 +46,12 @@ public class NoteCommandParserTest {
     }
 
     @Test
+    public void parse_missingIndex_throwsParseException() {
+        assertParseFailure(parser, PREFIX_NOTE + "hello",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_repeatedNotePrefix_throwsParseException() {
         assertParseFailure(parser, "1" + NOTE_DESC_AMAZON + NOTE_DESC_BYTEDANCE,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NOTE));

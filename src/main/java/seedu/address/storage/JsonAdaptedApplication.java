@@ -51,7 +51,7 @@ class JsonAdaptedApplication {
     public JsonAdaptedApplication(Application source) {
         company = source.getCompany().value;
         role = source.getRole().value;
-        applicationDate = source.getApplicationDate().value;
+        applicationDate = source.getApplicationDate().toString();
         url = source.getUrl().map(u -> u.value).orElse(null);
         status = source.getStatus().toString();
         note = source.getNote().value;

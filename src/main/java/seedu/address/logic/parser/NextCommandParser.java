@@ -21,8 +21,13 @@ public class NextCommandParser implements Parser<NextCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new NextCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, NextCommand.MESSAGE_USAGE), pe);
+
+            if (args.trim().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, NextCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw pe;
+            }
         }
     }
 
