@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.application.ApplicationContainsKeywordsPredicate;
+import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Status;
 
 public class FindCommandParserTest {
@@ -35,6 +36,8 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " " + PREFIX_ROLE + " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + " ",
+                ApplicationDate.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, " " + PREFIX_URL + " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " " + PREFIX_STATUS + " ",
@@ -89,6 +92,19 @@ public class FindCommandParserTest {
                 FindCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_invalidDates_throwsParseException() {
+        assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + "invalid-date",
+                ApplicationDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + "2025-01-01:invalid-date",
+                ApplicationDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + "invalid-date:2025-01-01",
+                ApplicationDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + "2025-01-01:2025-01-01:2025-01-01",
+                "Date range should be in the format START_DATE:END_DATE");
+        assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + "2025-12-31:2025-01-01",
+                "Start date cannot be after end date.");
+    }
     @Test
     public void parse_invalidStatus_throwsParseException() {
         assertParseFailure(parser, " " + PREFIX_STATUS + "hi", Status.MESSAGE_CONSTRAINTS);
