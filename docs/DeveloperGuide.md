@@ -1039,5 +1039,5 @@ testers are expected to do more *exploratory* testing.
 
 2. Verifying automatic save
 
-    1. Add, edit, or delete an application, then close the app and relaunch it.  
+    1. Add, edit, or delete an application, then close the app and relaunch it.
        Expected: The latest changes are retained.
