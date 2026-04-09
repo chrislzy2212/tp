@@ -702,7 +702,7 @@ Opens the help window.
 
 **What you should expect**
 
-* A help window with user guide link available for copy appears.
+* A help window appears, with a User Guide link available for copying.
 
 ---
 
