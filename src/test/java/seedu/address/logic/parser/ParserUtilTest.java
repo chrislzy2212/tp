@@ -180,14 +180,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseNote_invalidTooLongValue_throwsParseException() {
-        assertThrows(ParseException.class, Note.MESSAGE_LENGTH_CONSTRAINTS,
-                () -> ParserUtil.parseNote(INVALID_NOTE_TOO_LONG));
+        assertThrows(ParseException.class, Note.MESSAGE_LENGTH_CONSTRAINTS, ()
+                -> ParserUtil.parseNote(INVALID_NOTE_TOO_LONG));
     }
 
     @Test
     public void parseNote_invalidCharacters_throwsParseException() {
-        assertThrows(ParseException.class, Note.MESSAGE_CONSTRAINTS,
-                () -> ParserUtil.parseNote(INVALID_NOTE_CHARACTERS));
+        assertThrows(ParseException.class, Note.MESSAGE_CONSTRAINTS, ()
+                -> ParserUtil.parseNote(INVALID_NOTE_CHARACTERS));
     }
 
     @Test

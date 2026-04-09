@@ -17,14 +17,14 @@ public class NoteTest {
     @Test
     public void constructor_invalidNote_throwsIllegalArgumentException() {
         String invalidNote = "a".repeat(201);
-        assertThrows(IllegalArgumentException.class, Note.MESSAGE_LENGTH_CONSTRAINTS,
-                () -> new Note(invalidNote));
+        assertThrows(IllegalArgumentException.class, Note.MESSAGE_LENGTH_CONSTRAINTS, ()
+                -> new Note(invalidNote));
     }
 
     @Test
     public void constructor_invalidCharacters_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, Note.MESSAGE_CONSTRAINTS,
-                () -> new Note("hello🙂"));
+        assertThrows(IllegalArgumentException.class, Note.MESSAGE_CONSTRAINTS, ()
+                -> new Note("hello🙂"));
     }
 
     @Test
