@@ -123,6 +123,6 @@ public class DropCommandTest {
         String details = droppedApplications.stream()
                 .map(application -> "- " + Messages.format(application))
                 .collect(Collectors.joining("\n"));
-        return message + "\n" + details;
+        return message + "\n" + DropCommand.MESSAGE_DROPPED_APPLICATIONS_HEADER + "\n" + details;
     }
 }

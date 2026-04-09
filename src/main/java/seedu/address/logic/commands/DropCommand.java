@@ -25,7 +25,9 @@ public class DropCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_DROP_APPLICATIONS_SUCCESS =
-            "Dropped %1$d \"REJECTED\"/\"WITHDRAWN\" application(s).";
+            "Dropped %1$d \"REJECTED\"/\"WITHDRAWN\" application(s) from the list!";
+    public static final String MESSAGE_DROPPED_APPLICATIONS_HEADER =
+            "Dropped applications:";
     public static final String MESSAGE_NO_REJECTED_WITHDRAWN_IN_CURRENT_LIST =
             "No \"REJECTED\" or \"WITHDRAWN\" applications in the current list.";
 
@@ -69,7 +71,7 @@ public class DropCommand extends Command {
         String details = droppedApplications.stream()
                 .map(application -> "- " + Messages.format(application))
                 .collect(Collectors.joining("\n"));
-        return summary + "\n" + details;
+        return summary + "\n" + MESSAGE_DROPPED_APPLICATIONS_HEADER + "\n" + details;
     }
 
     @Override
