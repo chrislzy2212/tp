@@ -785,4 +785,4 @@ A: Install LockedIn on the other computer and replace the empty data file it cre
 | **Next**       | `next INDEX`                                                           | `next 3`                                                                                      |
 | **Note**       | `note INDEX NOTE`                                                      | `note 1 Interview at Sunday`                                                                  |
 | **Unalias**    | `unalias ALIAS`                                                        | `unalias ls`                                                                                  |
-                                                                                  |
+                                                                                  
