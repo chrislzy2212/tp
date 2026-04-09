@@ -72,6 +72,37 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_noFieldSpecified_returnsDeferredNotEditedError() {
+        // No field provided: parser cannot know bounds, so defers MESSAGE_NOT_EDITED to execute
+        EditCommand expected = new EditCommand(INDEX_FIRST_APPLICATION,
+                new EditApplicationDescriptor(), EditCommand.MESSAGE_NOT_EDITED);
+        assertParseSuccess(parser, "1", expected);
+    }
+
+    @Test
+    public void parse_extraPreambleText_returnsDeferredInvalidFormatError() {
+        // Extra random text after valid index: defers invalid-format error so bounds check runs first
+        EditCommand expected = new EditCommand(INDEX_FIRST_APPLICATION,
+                new EditApplicationDescriptor(), MESSAGE_INVALID_FORMAT);
+
+        // random text after index
+        assertParseSuccess(parser, "1 some random string", expected);
+
+        // unrecognized prefix treated as preamble text
+        assertParseSuccess(parser, "1 i/ string", expected);
+    }
+
+    @Test
+    public void parse_extraPreambleTextWithValidField_returnsDeferredInvalidFormatError() {
+        // Extra text in preamble takes priority even when a valid field is also supplied
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder()
+                .withCompany(VALID_COMPANY_AMAZON).build();
+        EditCommand expected = new EditCommand(INDEX_FIRST_APPLICATION, descriptor, MESSAGE_INVALID_FORMAT);
+
+        assertParseSuccess(parser, "1 garbage" + COMPANY_DESC_AMAZON, expected);
+    }
+
+    @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_COMPANY_DESC, Company.MESSAGE_CONSTRAINTS); // invalid company
         assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
