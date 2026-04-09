@@ -130,7 +130,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the application data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
+* stores the application data i.e., all `Application` objects (containing `Company`, `Role`, `ApplicationDate`, optional `Url`, `Status`, and `Note`) which are contained in a `UniqueApplicationList` object.
 * stores the currently displayed `Application` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be observed. For example, the UI can be bound to this list so that it automatically updates when the data in the list changes.
 * stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -202,6 +202,10 @@ Implementation details:
 
 <puml src="diagrams/DropActivityDiagram.puml" alt="Activity flow for drop command" width="420" />
 
+The sequence diagram below shows the internal `Logic` and `Model` interactions when `drop` is executed:
+
+<puml src="diagrams/DropSequenceDiagram-Logic.puml" alt="Interactions inside Logic and Model for drop command" />
+
 ### Notes feature (`note` and `clearnote`)
 
 LockedIn stores free-form notes in the immutable `Application` entity through the `Note` value object.
@@ -214,8 +218,39 @@ Behavior:
 
 Validation:
 
-* `NoteCommandParser` enforces exactly one `n/` prefix and rejects empty note text.
+* `NoteCommandParser` enforces exactly one `nt/` prefix and rejects empty note text.
 * `ClearNoteCommandParser` only accepts a single index argument.
+
+### Copy URL feature (`copy`)
+
+`copy INDEX` copies the URL of the specified application to the system clipboard.
+
+Implementation flow:
+
+1. `CopyCommandParser` validates the index argument.
+1. `CopyCommand` resolves the target application from `Model#getFilteredApplicationList()`.
+1. It retrieves the `Optional<Url>` field; if empty, throws a `CommandException` with a descriptive message.
+1. It writes the URL string to the system clipboard via JavaFX `Clipboard.getSystemClipboard()`.
+
+<puml src="diagrams/CopySequenceDiagram.puml" alt="Interactions inside Logic and Model for copy command" />
+
+Design note: The command requires a URL to be present; applications without a URL will always fail this command with a clear error message.
+
+### Find feature (`find`)
+
+`find` filters the displayed application list using one or more of the following prefixes: `n/COMPANY`, `r/ROLE`, `d/DATE`, `s/STATUS`. At least one prefix must be provided.
+
+Implementation flow:
+
+1. `FindCommandParser` tokenizes the input using `ArgumentTokenizer`, validates that at least one recognized prefix is present, and rejects invalid `Status` values early.
+1. It constructs an `ApplicationContainsKeywordsPredicate` with separate keyword lists per field.
+1. `FindCommand` calls `Model#updateFilteredApplicationList(predicate)` to apply the filter.
+
+Predicate logic (`ApplicationContainsKeywordsPredicate`):
+* Keywords within the same field are matched with **OR** logic (any keyword match passes).
+* Different fields are combined with **AND** logic (all provided fields must match).
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions inside Logic and Model for find command" />
 
 ### Auto-save behavior and error handling
 
@@ -712,6 +747,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LockedIn shows an error message indicating the specified index is invalid.
 
       Use case ends.
+  
+* 2a. The note field for the selected application is already empty.
+
+  * 2a1. LockedIn shows an message indicating the note field is already empty.
+
+    Use case ends.
 
 
 **Use case: Create an alias for a command word**
