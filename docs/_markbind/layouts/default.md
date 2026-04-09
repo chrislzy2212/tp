@@ -41,10 +41,11 @@
     * [Unalias Command]({{ baseUrl }}/UserGuide.html#unalias)
     * [Alias-List Command]({{ baseUrl }}/UserGuide.html#alias-list)
     * [Find Command]({{ baseUrl }}/UserGuide.html#find)
+    * [Clear Note Command]({{ baseUrl }}/UserGuide.html#clearnote)
     * [Delete Command]({{ baseUrl }}/UserGuide.html#delete)
     * [Drop Command]({{ baseUrl }}/UserGuide.html#drop)
     * [Clear Command]({{ baseUrl }}/UserGuide.html#clear)
-    * [Exit Command]({{ baseUrl }}/UserGuide.html#exit)
+    * [Exit Command]({{ baseUrl }}/UserGuide.html#exit)s
   * [Saving and Editing Data]({{ baseUrl }}/UserGuide.html#saving-and-editing-data)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
