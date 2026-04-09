@@ -161,7 +161,8 @@ Notes about the command format
 - Extra words for commands that do not take parameters, such as `help`, `list`, and `exit` are ignored.
   Example: `help 123` is treated as `help`.
 
-- Commands like `clear` and `drop` do not accept any arguments. Using arguments will result in an error.
+- Commands like `clear` and `drop` do not accept any arguments. Using arguments will result in an error. This helps prevent confusion with 
+  commands such as delete, which target a single application by index.
   Example: `clear 4` will show an error message.
 
 - Leading and trailing spaces around field values are ignored.
@@ -251,12 +252,18 @@ Add a note to an application: <code>note</code>
 
 Adds a note to an existing application in LockedIn.
 
+| Before                             | After                           |
+|------------------------------------|---------------------------------|
+|  | |
+
 **Format:** `note INDEX nt/NOTE`
 
 **Notes**
 - `INDEX` refers to the index number shown in the displayed list.
 - `INDEX` must be a positive integer.
-- `NOTE` can contain letters, numbers, spaces, and symbols, and must not be blank.
+- `NOTE` can contain English letters, numbers, spaces, and these symbols:
+  `` ` ~ ! @ # $ % ^ & * ( ) - _ = + [ { ] } \ | ; : ' " , < . > / ? ``
+- `NOTE` must not be blank and must not exceed 200 characters.
 - If the selected application already has a note, the existing note is replaced by the new note.
 - Notes can be used to store reminders, interview details, recruiter names, deadlines, or any other application-related information.
 
