@@ -60,6 +60,11 @@ public class NoteCommandParserTest {
     @Test
     public void parse_noteTooLong_throwsParseException() {
         String longNote = "a".repeat(201);
-        assertParseFailure(parser, "1 " + PREFIX_NOTE + longNote, Note.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + PREFIX_NOTE + longNote, Note.MESSAGE_LENGTH_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidNoteCharacters_throwsParseException() {
+        assertParseFailure(parser, "1 " + PREFIX_NOTE + "hello🙂", Note.MESSAGE_CONSTRAINTS);
     }
 }
