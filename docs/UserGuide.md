@@ -421,7 +421,7 @@ Adds or replaces the note of an existing application.
 
 Before                                | After                                   |
 | ------------------------------------ | --------------------------------------- |
-| ![beforeNote](images/beforeNote.png) | ![afterClearNote](images/afterNote.png) |
+| ![beforeNote](images/beforeNote.png) | ![afterNote](images/afterNote.png) |
 
 **Notes**
 
@@ -521,7 +521,7 @@ Moves an application to the next stage in the application workflow.
 
 | Before                               | After                              |
 | ------------------------------------ | ---------------------------------- |
-| ![beforeNext](images/beforeNext.png) | ![afterEdit](images/afterNext.png) |
+| ![beforeNext](images/beforeNext.png) | ![afterNext](images/afterNext.png) |
 
 **Format:** `next INDEX`
 
