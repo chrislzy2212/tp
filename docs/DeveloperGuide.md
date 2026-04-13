@@ -162,12 +162,17 @@ This section describes some noteworthy details on how certain features are imple
 
 Alias support is implemented through a collaboration between `AddressBookParser`, `Model`, and `UserPrefs`:
 
-1. `AddressBookParser#parseCommand` extracts the command word and checks whether it exists in the alias map.
-1. If a mapping exists, the alias is rewritten to the corresponding built-in command word before dispatch.
-1. `AliasCommand` validates that the target command is supported and the alias itself is not a built-in command.
-1. Valid mappings are persisted via `Model#setAlias(...)`, which writes to `UserPrefs`.
-1. `UnaliasCommand` removes a mapping via `Model#removeAlias(...)`.
-1. `AliasListCommand` renders all current mappings in alphabetical order.
+1. `AddressBookParser#parseCommand` first performs an initial split of the raw user input into:
+    * the first token (`commandWord`)
+    * the remaining text (`arguments`)
+2. It then checks whether `commandWord` exists in the alias map.
+3. If a mapping exists, only the extracted `commandWord` is rewritten to the corresponding built-in command word.
+4. The rewritten command word is then dispatched to the matching built-in command parser.
+5. Command-specific parsing of `arguments` (such as prefix detection and argument tokenization) happens only after this dispatch, inside the selected parser.
+6. `AliasCommand` validates that the target command is supported and the alias itself is not a built-in command.
+7. Valid mappings are persisted via `Model#setAlias(...)`, which writes to `UserPrefs`.
+8. `UnaliasCommand` removes a mapping via `Model#removeAlias(...)`.
+9. `AliasListCommand` renders all current mappings in alphabetical order.
 
 <puml src="diagrams/AliasSequenceDiagram.puml" alt="Interactions inside Logic and Model for alias creation" />
 
@@ -324,40 +329,49 @@ in a CLI environment. It allows target users to log application updates, record 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities:
+High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                      | So that I can…​                                         |
-|----------|-----------------|---------------------------------------------------|---------------------------------------------------------|
-| `* * *`  | first time user | add an application record                         | track my application                                    |
-| `* * *`  | first time user | view all applications in a list                   | see all my applications                                 |
-| `* * *`  | first time user | delete application records                        | remove companies I am no longer interested in           |
-| `* * *`  | first time user | edit an application's details                     | correct mistakes I made                                 |
-| `* * *`  | user            | update an application status                      | track the progress of my application                    |
-| `* * *`  | user            | save the application date for each application    | track my applications efficiently                       |
-| `* * *`  | user            | save data on my hard disk                         | access my records locally                               |
-| `* * *`  | user            | add an application URL to an entry                 | have a reference to the original application page       |
-| `* * `   | user            | copy an application URL                           | quickly open the link in my browser without retyping it |
-| `* * `   | user            | add notes to an application                       | store reminders or interview details                    |
-| `* *`    | user            | filter the list by status                         | see only my active applications                         |
-| `* *`    | user            | filter applications by company name and role      | find relevant applications quickly                      |
-| `* *`    | user            | filter applications by application date           | find applications submitted during a specific period quickly                      |
-| `* *`    | user            | filter applications by URL                        | find applications linked to a specific job posting quickly |
-| `* *`    | user             | remove rejected or withdrawn applications quickly | keep my application list clean         |
-| `* *`    | user            | view total number of applications by status       | track my overall progress                               |
-| `* *`    | expert user     | use short aliases                                 | type commands faster                                    |
-| `* *`    | expert user      | remove aliases                              | stop using shortcuts I no longer need               | Add |
-| `* *`    | expert user      | view all saved aliases                      | remember what shortcuts I created                   |
-| `* *`    | expert user     | cycle through previous commands                   | reuse previously typed commands                         |
-| `* *`    | user            | view the potential pay of each position           | know which applications result in higher pay            |
-| `* *`    | user            | filter the list by pay range                      | determine expected salary levels                        |
-| `*`      | user            | favourite companies                               | track companies I am particularly interested in         |
-| `*`      | first time user | see dummy data                                    | understand how the data is structured                   |
-| `*`      | expert user     | use tab completion                                | avoid typing full commands                              |
-| `*`      | user            | pin the application window on top                 | keep the logbook visible while browsing job portals     |
-| `*`      | user            | undo a command                                    | recover from accidental deletions                       |
-| `*`      | expert user     | export data into another file format              | keep backups or reuse data elsewhere                    |
-| `*`      | expert user     | add tags to companies                             | record additional information about companies           |
+Status:
+* `✓` — implemented in the current version
+* `○` — planned for a future version
 
+| Priority | As a …​         | I want to …​                                                | So that I can…​                                               | Status |
+|----------|-----------------|-------------------------------------------------------------|---------------------------------------------------------------|--------|
+| `* * *`  | first-time user | add an application record                                   | track my internship applications                              | `✓` |
+| `* * *`  | first-time user | view all applications in a list                             | see all my applications at a glance                           | `✓` |
+| `* * *`  | user            | edit an application's details                               | correct mistakes I made                                       | `✓` |
+| `* * *`  | user            | delete an application record                                | remove applications I no longer want to track                 | `✓` |
+| `* * *`  | user            | update an application's status                              | track the progress of each application                        | `✓` |
+| `* * *`  | user            | save data automatically on my hard disk                     | keep my records without manually saving                       | `✓` |
+| `* * *`  | user            | record the application date for each application            | track when I applied                                          | `✓` |
+| `* * *`  | user            | attach a URL to an application                              | keep a reference to the original job posting                  | `✓` |
+| `* *`    | user            | copy an application's URL                                   | open the link quickly without retyping                        | `✓` |
+| `* *`    | user            | add notes to an application                                 | store reminders or interview details                          | `✓` |
+| `* *`    | user            | clear a note from an application                            | remove outdated notes                                         | `✓` |
+| `* *`    | user            | filter applications by company name                         | find relevant applications quickly                            | `✓` |
+| `* *`    | user            | filter applications by role                                 | find relevant applications quickly                            | `✓` |
+| `* *`    | user            | filter applications by application date or date range       | find applications submitted during a certain period           | `✓` |
+| `* *`    | user            | filter applications by URL                                  | find applications linked to a specific posting                | `✓` |
+| `* *`    | user            | filter applications by status                               | focus on applications at a specific stage                     | `✓` |
+| `* *`    | user            | restore the full application list after filtering           | return to viewing everything easily                           | `✓` |
+| `* *`    | user            | clear all applications in the current displayed list        | remove a group of shown applications quickly                  | `✓` |
+| `* *`    | user            | remove terminal applications from the current displayed list| keep my list clean by removing rejected or withdrawn entries  | `✓` |
+| `* *`    | expert user     | use short aliases for commands                              | type commands faster                                          | `✓` |
+| `* *`    | expert user     | remove aliases                                              | stop using shortcuts I no longer need                         | `✓` |
+| `* *`    | expert user     | view all saved aliases                                      | remember what shortcuts I created                             | `✓` |
+| `* *`    | expert user     | keep my aliases across restarts                             | avoid recreating them every time I open the app               | `✓` |
+| `* *`    | expert user     | cycle through previously entered commands                   | reuse or edit past commands quickly                           | `✓` |
+| `* *`    | user            | view the total number of applications by status             | track my overall progress                                     | `○` |
+| `* *`    | user            | view the potential pay of each position                     | compare opportunities more easily                             | `○` |
+| `* *`    | user            | filter applications by pay range                            | focus on opportunities within a salary range                  | `○` |
+| `*`      | user            | favourite companies                                         | keep track of companies I care about most                     | `○` |
+| `*`      | first-time user | see sample data on first launch                             | understand how the data is structured                         | `✓` |
+| `*`      | expert user     | use tab completion                                          | avoid typing full commands                                    | `○` |
+| `*`      | user            | pin the application window on top                           | keep it visible while browsing job portals                    | `○` |
+| `*`      | user            | undo a command                                              | recover from accidental changes                               | `○` |
+| `*`      | expert user     | export data into another file format                        | keep backups or reuse data elsewhere                          | `○` |
+| `*`      | expert user     | add tags to applications or companies                       | organize records with more flexibility                        | `○` |
 
 ### Use cases
 

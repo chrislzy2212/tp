@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -68,7 +69,7 @@ public class AliasCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TARGET);
         }
 
-        if (isSupportedCommandWord(alias)) {
+        if (isReservedAlias(alias)) {
             throw new CommandException(MESSAGE_INVALID_ALIAS);
         }
 
@@ -95,12 +96,18 @@ public class AliasCommand extends Command {
 
     /**
      * Returns true if the given word is a valid built-in command word supported by the application.
-     *
      * @param word The word to check.
      * @return True if the word is a supported command word, false otherwise.
      */
     private boolean isSupportedCommandWord(String word) {
         return SUPPORTED_COMMAND_WORDS.contains(word);
+    }
+
+    /**
+     * Returns true if the alias clashes with any built-in command word, ignoring case.
+     */
+    private boolean isReservedAlias(String word) {
+        return SUPPORTED_COMMAND_WORDS.contains(word.toLowerCase(Locale.ROOT));
     }
 
     @Override

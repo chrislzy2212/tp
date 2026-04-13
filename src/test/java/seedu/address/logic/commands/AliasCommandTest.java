@@ -44,6 +44,15 @@ public class AliasCommandTest {
     }
 
     @Test
+    public void execute_aliasIsCaseVariantOfExistingCommandWord_throwsCommandException() {
+        Model model = new ModelManager();
+
+        AliasCommand aliasCommand = new AliasCommand("ADD", "delete");
+
+        assertCommandFailure(aliasCommand, model, AliasCommand.MESSAGE_INVALID_ALIAS);
+    }
+
+    @Test
     public void execute_existingAlias_overwritesAlias() throws Exception {
         Model model = new ModelManager();
         model.setAlias("ls", "list");
