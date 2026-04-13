@@ -7,7 +7,7 @@ import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new NextCommand object
+ * Parses input arguments and creates a new NextCommand object.
  */
 public class NextCommandParser implements Parser<NextCommand> {
 

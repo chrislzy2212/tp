@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's URL in the address book.
+ * Represents an application's URL in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidUrl(String)}
  */
 public class Url {

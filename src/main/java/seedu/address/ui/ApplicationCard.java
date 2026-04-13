@@ -55,7 +55,7 @@ public class ApplicationCard extends UiPart<Region> {
         company.setText(application.getCompany().value);
         role.setText(application.getRole().value);
         status.setText(application.getStatus().toString());
-        url.setText(application.getUrl().map(u -> u.value).orElse("url: -"));
+        url.setText(application.getUrl().map(u -> u.value).orElse("-"));
         applicationDate.setText(application.getApplicationDate().toString());
         note.setText(application.getNote().toString().isEmpty() ? "-" : application.getNote().toString());
 

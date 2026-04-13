@@ -20,7 +20,7 @@ import seedu.address.model.application.Status;
 import seedu.address.model.application.Url;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 

@@ -16,17 +16,20 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.ApplicationContainsKeywordsPredicate;
 import seedu.address.model.application.ApplicationDate;
+import seedu.address.model.application.Company;
+import seedu.address.model.application.Role;
 import seedu.address.model.application.Status;
+import seedu.address.model.application.Url;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -40,9 +43,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        List<String> companyKeywords = parseKeywords(argMultimap, PREFIX_COMPANY);
-        List<String> roleKeywords = parseKeywords(argMultimap, PREFIX_ROLE);
-        List<String> urlKeywords = parseKeywords(argMultimap, PREFIX_URL);
+        List<String> companyKeywords = parseCompanyKeywords(argMultimap);
+        List<String> roleKeywords = parseRoleKeywords(argMultimap);
+        List<String> urlKeywords = parseUrlKeywords(argMultimap);
         List<String> statusKeywords = parseStatusKeywords(argMultimap);
 
         LocalDate[] dateRange = parseDateRange(argMultimap);
@@ -69,6 +72,36 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new ArrayList<>();
     }
 
+    private List<String> parseCompanyKeywords(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> keywords = parseKeywords(argMultimap, PREFIX_COMPANY);
+        for (String keyword : keywords) {
+            if (!Company.isValidCompany(keyword)) {
+                throw new ParseException(Company.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return keywords;
+    }
+
+    private List<String> parseRoleKeywords(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> keywords = parseKeywords(argMultimap, PREFIX_ROLE);
+        for (String keyword : keywords) {
+            if (!Role.isValidRole(keyword)) {
+                throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return keywords;
+    }
+
+    private List<String> parseUrlKeywords(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> keywords = parseKeywords(argMultimap, PREFIX_URL);
+        for (String keyword : keywords) {
+            if (!Url.isValidUrl(keyword)) {
+                throw new ParseException(Url.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return keywords;
+    }
+
     private List<String> parseStatusKeywords(ArgumentMultimap argMultimap) throws ParseException {
         List<String> statusKeywords = parseKeywords(argMultimap, PREFIX_STATUS);
         for (String status : statusKeywords) {
@@ -88,7 +121,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_APPLICATION_DATE).isPresent()) {
             String dateArg = argMultimap.getValue(PREFIX_APPLICATION_DATE).get().trim();
             if (dateArg.isEmpty()) {
-                throw new ParseException(ApplicationDate.MESSAGE_CONSTRAINTS);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
             if (dateArg.contains(":")) {
                 String[] dates = dateArg.split(":");
