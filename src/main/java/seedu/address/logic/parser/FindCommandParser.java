@@ -19,7 +19,7 @@ import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Status;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object.
  */
 public class FindCommandParser implements Parser<FindCommand> {
 

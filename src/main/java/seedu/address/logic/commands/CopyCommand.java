@@ -16,7 +16,7 @@ import seedu.address.model.application.Application;
 import seedu.address.model.application.Url;
 
 /**
- * Copy an application URL identified using it's displayed index from the address book.
+ * Copy an application URL identified using its displayed index from the address book.
  */
 public class CopyCommand extends Command {
 

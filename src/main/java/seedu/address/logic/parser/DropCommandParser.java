@@ -4,7 +4,7 @@ import seedu.address.logic.commands.DropCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DropCommand object
+ * Parses input arguments and creates a new DropCommand object.
  */
 public class DropCommandParser implements Parser<DropCommand> {
 

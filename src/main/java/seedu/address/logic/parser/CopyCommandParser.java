@@ -7,7 +7,7 @@ import seedu.address.logic.commands.CopyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new CopyCommand object
+ * Parses input arguments and creates a new CopyCommand object.
  */
 public class CopyCommandParser implements Parser<CopyCommand> {
 

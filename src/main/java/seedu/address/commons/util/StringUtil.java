@@ -39,7 +39,7 @@ public class StringUtil {
     }
 
     /**
-     * Returns a detailed message of the t, including the stack trace.
+     * Returns a detailed message of the throwable, including the stack trace.
      */
     public static String getDetails(Throwable t) {
         requireNonNull(t);
