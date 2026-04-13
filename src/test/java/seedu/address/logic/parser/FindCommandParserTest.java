@@ -19,7 +19,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.application.ApplicationContainsKeywordsPredicate;
 import seedu.address.model.application.ApplicationDate;
+import seedu.address.model.application.Company;
+import seedu.address.model.application.Role;
 import seedu.address.model.application.Status;
+import seedu.address.model.application.Url;
 
 public class FindCommandParserTest {
 
@@ -37,7 +40,7 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " " + PREFIX_ROLE + " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " " + PREFIX_APPLICATION_DATE + " ",
-                ApplicationDate.MESSAGE_CONSTRAINTS);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " " + PREFIX_URL + " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " " + PREFIX_STATUS + " ",
@@ -70,9 +73,9 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " " + PREFIX_APPLICATION_DATE + "2022-12-12:2022-12-15", expectedFindCommand);
 
         expectedFindCommand = new FindCommand(new ApplicationContainsKeywordsPredicate(
-                new ArrayList<>(), new ArrayList<>(), null, null, Arrays.asList("careers.google.com"),
+                new ArrayList<>(), new ArrayList<>(), null, null, Arrays.asList("https://careers.google.com"),
                 new ArrayList<>()));
-        assertParseSuccess(parser, " " + PREFIX_URL + "careers.google.com", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_URL + "https://careers.google.com", expectedFindCommand);
 
         expectedFindCommand = new FindCommand(new ApplicationContainsKeywordsPredicate(
                 new ArrayList<>(), new ArrayList<>(), null, null, new ArrayList<>(), Arrays.asList("Applied")));
@@ -80,9 +83,9 @@ public class FindCommandParserTest {
 
         expectedFindCommand = new FindCommand(new ApplicationContainsKeywordsPredicate(
                 Arrays.asList("Google"), Arrays.asList("Intern"), date, date,
-                Arrays.asList("careers.google.com"), Arrays.asList("Applied")));
+                Arrays.asList("https://careers.google.com"), Arrays.asList("Applied")));
         assertParseSuccess(parser, " " + PREFIX_COMPANY + "Google " + PREFIX_ROLE + "Intern "
-                + PREFIX_APPLICATION_DATE + "2022-12-12 " + PREFIX_URL + "careers.google.com "
+                + PREFIX_APPLICATION_DATE + "2022-12-12 " + PREFIX_URL + "https://careers.google.com "
                 + PREFIX_STATUS + "Applied", expectedFindCommand);
     }
 
@@ -110,6 +113,21 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " " + PREFIX_STATUS + "hi", Status.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, " " + PREFIX_COMPANY + "Google " + PREFIX_STATUS + "hi",
                 Status.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidCompany_throwsParseException() {
+        assertParseFailure(parser, " " + PREFIX_COMPANY + "Google😀", Company.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidRole_throwsParseException() {
+        assertParseFailure(parser, " " + PREFIX_ROLE + "工程师", Role.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidUrl_throwsParseException() {
+        assertParseFailure(parser, " " + PREFIX_URL + "invalid_url_without_dot", Url.MESSAGE_CONSTRAINTS);
     }
 
     @Test
