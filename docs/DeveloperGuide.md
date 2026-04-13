@@ -1143,7 +1143,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `copy 2` where the second application does not have a URL  
        Expected: No URL is copied. An error message is shown indicating that the selected application does not have a URL.
 
-### Next and drop commands
+### Advancing to next stage
 
 1. Advancing application status (`next`)
 
@@ -1158,7 +1158,9 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `next 0`  
        Expected: No application is updated. An error message is shown.
 
-2. Dropping terminal applications (`drop`)
+### Removing withdrawn/rejected applications
+
+1. Dropping terminal applications (`drop`)
 
     1. Prerequisites: Current displayed list contains at least one application with status `Rejected` or `Withdrawn`.
 
@@ -1251,6 +1253,49 @@ This inconsistency in command parser strictness reflects implementation choices 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Effort**
+
+Compared to AddressBook-Level3 (AB3), LockedIn required **moderate-to-high effort** to adapt into a domain-specific internship application tracker. Although AB3 already provided the overall architecture, command pipeline, storage framework, and JavaFX-based UI foundation, substantial work was still needed to reshape the product from a contact manager into one centered around internship applications.
+
+### Data model redesign
+
+A major part of the effort went into redesigning the data model. Instead of reusing AB3’s contact-oriented fields directly, LockedIn introduces an `Application` domain model with fields such as `Company`, `Role`, `ApplicationDate`, optional `Url`, `Status`, and `Note`.
+
+Supporting this new model required coordinated changes across the `Model`, `Logic`, `Storage`, parser validation, tests, and user-facing documentation to ensure the new domain was handled consistently.
+
+### UI adaptation
+
+Another significant area of work was adapting the UI design to better suit internship tracking. While the team started from AB3’s JavaFX structure, the interface had to be adjusted so that application-specific details such as company, role, date, status, URL, and notes could be displayed and managed more clearly.
+
+This added effort beyond simply reusing the original layout.
+
+### New feature implementation
+
+The team also implemented several features that were not present in AB3. These include alias support (`alias`, `unalias`, `alias-list`), status progression through `next`, note management (`note`, `clearnote`), URL copying through the system clipboard (`copy`), terminal-application cleanup via `drop`, and command history navigation in the UI.
+
+Some of these features, such as alias persistence and clipboard interaction, required coordination across multiple components rather than being confined to a single command.
+
+### Validation and product behavior
+
+Additional effort went into refining validation and domain-specific behavior. Examples include duplicate detection based on company, role, and application date, date range handling in `find`, status validation, URL validation, and filtered-list operations such as `clear` and `drop`.
+
+These behaviors had to be implemented carefully and documented precisely so that the product remained predictable for users and testers.
+
+### Documentation and testing
+
+A notable portion of the effort also went into documentation and testing. The team had to update the User Guide and Developer Guide to reflect the evolved product behavior, revise use cases, maintain UML diagrams, and prepare manual testing instructions that are accurate for peer testers.
+
+Since the product differs meaningfully from AB3, keeping the documentation aligned with the implementation required careful checking throughout development.
+
+### Reuse and effort saved
+
+The project benefited significantly from AB3’s architecture, command framework, JavaFX structure, and storage design, which reduced the effort needed to build a desktop application from scratch. The team also used GitHub Copilot for IDE-assisted autocomplete, which reduced some low-level coding effort.
+
+However, the overall work remained substantial because the team still had to redesign the domain model, revise command semantics, adapt the UI, and implement multiple new features on top of the existing framework.
+
+### Overall assessment
+
+Overall, LockedIn involved far more than cosmetic changes to AB3. The main effort lay in transforming a general-purpose address book into a practical internship tracker with domain-specific behavior, additional commands, an adapted UI, and documentation that accurately reflects the final product.
 ## **Appendix: Planned Enhancements**
 
 **Team size:** 5
