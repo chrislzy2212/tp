@@ -162,10 +162,10 @@ Notes about the command format
 * Parameters can be entered in any order unless stated otherwise.
   Example: if the command specifies `c/COMPANY r/ROLE`, `r/ROLE c/COMPANY` is also accepted.
 
-* Extra words for commands that do not take parameters, such as `help`, `list`, and `exit`, are ignored.
+* **Commands that ignore extra arguments:** `help`, `list`, `exit` treat extra words as insignificant.
   Example: `help 123` is treated as `help`.
 
-* Commands such as `clear` and `drop` do not accept any arguments.
+* **Strict commands that reject extra arguments:** `clear`, `drop` will show an error if any arguments are provided.
   Example: `clear 4` will show an error message.
 
 * Leading and trailing spaces around field values are ignored.
@@ -197,7 +197,7 @@ Characters outside this set are rejected.
 
 **About non-ASCII characters and decorative fonts**
 
-LockedIn currently validates company names, role names, and notes using a fixed ASCII-only character set. This means decorative or non-ASCII text, emojis, and many non-English characters may be rejected or behave differently from normal English text.
+LockedIn currently validates company names, role names, and notes using a fixed ASCII-only character set. This means non-ASCII characters from non-Latin scripts, decorative fonts, emojis, and many non-English characters may be rejected or behave differently from normal English text.
 
 For best results, use standard English letters, digits, spaces, and the supported symbols listed above.
 
@@ -362,7 +362,7 @@ For date fields, it can either find exact dates or find dates within a range (in
   Example: `c/google` matches `Google`.
 * Status keywords are also case-insensitive. For example, `find s/applied` and `find s/APPLIED` are both valid.
 * For company, role, URL, and status, applications matching at least one keyword in the same field are returned.
-* For URL fields, the keyword must match exactly as stored, including characters such as trailing slashes (`/`). For example, `https://www.example.com` does not match `https://www.example.com/`.
+* For URL fields, the keyword must match exactly as stored, including characters such as trailing slashes (`/`). For example, `https://www.example.com` does not match `https://www.example.com/`. This exact-match behavior is by design to ensure precise URL identification in the application database.
 * If multiple fields are specified, applications must match all those fields.
 * `d/START_DATE:END_DATE` returns applications whose application dates fall within the range, inclusive.
 * `START_DATE` must be earlier than or equal to `END_DATE`.
@@ -424,7 +424,7 @@ Adds or replaces the note of an existing application.
 
 **Format:** `note INDEX NOTE`
 
-Before                                | After                                   |
+| Before                                | After                                   |
 | ------------------------------------ | --------------------------------------- |
 | ![beforeNote](images/beforeNote.png) | ![afterNote](images/afterNote.png) |
 
@@ -787,8 +787,8 @@ A: No. LockedIn currently supports only English letters, digits, spaces, and a [
 
 <br>
 
-**Q: Why do certain fonts not work properly?**<br>
-A: LockedIn validates the company, role, and note fields using an ASCII-only character set, so other fonts not in the set may be rejected.
+**Q: Why do certain characters not work properly?**<br>
+A: LockedIn validates the company, role, and note fields using an ASCII-only character set. Non-ASCII characters (including those from non-Latin scripts and decorative fonts) may be rejected. Only the [supported character set](#supported-characters) is reliably accepted.
 
 <br>
 
@@ -899,4 +899,3 @@ Manually restore the minimized Help window.
 | **Next**       | `next INDEX`                                                              | `next 3`                                               |
 | **Note**       | `note INDEX NOTE`                                                         | `note 1 OA deadline is 2025-03-15`                     |
 | **Unalias**    | `unalias ALIAS`                                                           | `unalias ls`                                           |
-
