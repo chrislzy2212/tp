@@ -15,6 +15,8 @@
 
 This project is adapted from [AddressBook-Level3](https://se-education.org/addressbook-level3/) by the [SE-EDU initiative](https://se-education.org).
 
+**Note on naming:** Throughout this guide, you may encounter class names and package structures from the original AddressBook-Level3 (e.g., `AddressBook`, `AddressBookParser`, `AddressBookStorage`). These are inherited from the template and have been retained for consistency with the AB3 architecture. The product itself is called **LockedIn**.
+
 LockedIn relies on the following third-party libraries/frameworks:
 
 * [JavaFX](https://openjfx.io/) for the GUI.
@@ -65,7 +67,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -956,8 +958,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `exit`  
        Expected: The application closes.
 
-    2. Test case: `exit now`  
-       Expected: The application closes, as extra words after `exit` are ignored.
+    2. Test case: `exit abc`  
+       Expected: The application closes. Note: Unlike `clear` and `drop` commands, `exit` accepts and ignores extra arguments.
 
 ### Adding an application
 
@@ -1025,7 +1027,7 @@ testers are expected to do more *exploratory* testing.
        Expected: All applications in the data with company names matching either `Google` or `Meta` are shown, including applications that were not shown before the command was entered.
 
     5. Test case: `find u/https://www.google.com/`  
-       Expected: All applications in the data with URLs matching `careers.google.com` are shown, including applications that were not shown before the command was entered.
+       Expected: All applications in the data with URLs matching `https://www.google.com/` are shown, including applications that were not shown before the command was entered.
    
 ### Editing an application
 
@@ -1185,6 +1187,12 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message is shown.
 
 ### Clearing all applications
+
+**Note:** These commands in LockedIn have different strictness levels regarding extra arguments:
+- **Permissive commands** (accept and ignore extra arguments): `exit`, `list`, `help`
+- **Strict commands** (reject all extra arguments): `clear`, `drop`
+
+This inconsistency in command parser strictness reflects implementation choices made during development.
 
 1. Clearing all applications while all applications are being shown
 
