@@ -207,7 +207,7 @@ Implementation details:
 * Matching entries are deleted through `Model#deleteApplication(...)`.
 * If no terminal entries are present in the current list, the command fails with a descriptive error.
 
-<puml src="diagrams/DropActivityDiagram.puml" alt="Activity flow for drop command" width="300"  />
+<puml src="diagrams/DropActivityDiagram.puml" alt="Activity flow for drop command" width="300" height ="500" />
 
 The sequence diagram below shows the internal `Logic` and `Model` interactions when `drop` is executed:
 
