@@ -1248,3 +1248,21 @@ This inconsistency in command parser strictness reflects implementation choices 
 
     1. Add, edit, or delete an application, then close the app and relaunch it.
        Expected: The latest changes are retained.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Team size:** 5
+
+1. **Support partial URL matching in search:**
+   Currently, URL filtering is only applicable when users provide the full URL string. A planned enhancement is to support partial URL matching in `find u/` so users can search by meaningful fragments (for example, domain names or path keywords). This will make URL-based filtering faster and more forgiving in real-life usage.
+
+2. **Make status progression (`next`) more flexible for real-life scenarios:**
+   The current `next` command follows a fixed cyclic progression. While this is simple, real application progress can be non-linear and may require skipping, reverting, or branching between statuses. A planned enhancement is to support more flexible progression behavior so users can model real-world application flows more accurately.
+
+3. **Add a statistics dashboard:**
+   Users currently infer progress by scanning the list manually. A planned enhancement is to introduce a statistics dashboard that summarizes key metrics such as counts by status and overall pipeline distribution. This will provide quicker insight into application outcomes and progress trends.
+
+4. **Introduce undo/redo functionality:**
+   Accidental edits or deletions can happen during command-heavy workflows. A planned enhancement is to add undo/redo support so users can safely revert or reapply recent changes. This will improve confidence, reduce recovery effort, and make day-to-day usage more resilient.
