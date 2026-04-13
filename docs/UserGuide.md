@@ -745,7 +745,7 @@ Exit the program: <code>exit</code>
 Saving data
 </h3>
 
-LockedIn data are saved automatically after any command that changes the data.
+LockedIn's data is saved automatically after any command that changes the data.
 
 You do not need to save manually.
 
@@ -755,7 +755,7 @@ You do not need to save manually.
 Editing the data file
 </h3>
 
-LockedIn data are stored in:
+LockedIn's data is stored in:
 
 `[JAR file location]/data/lockedin.json`
 

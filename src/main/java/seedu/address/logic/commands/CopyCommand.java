@@ -16,7 +16,7 @@ import seedu.address.model.application.Application;
 import seedu.address.model.application.Url;
 
 /**
- * Copy an application URL identified using its displayed index from the address book.
+ * Copies an application URL identified using its displayed index from the address book.
  */
 public class CopyCommand extends Command {
 
@@ -27,7 +27,7 @@ public class CopyCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_COPY_APPLICATION_SUCCESS = "Copy Application URL: %1$s";
+    public static final String MESSAGE_COPY_APPLICATION_SUCCESS = "Copied Application URL: %1$s";
 
     private final Index targetIndex;
 

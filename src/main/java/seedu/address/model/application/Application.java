@@ -79,7 +79,7 @@ public class Application {
 
     /**
      * Returns true if both applications share the same identity fields.
-     * Identity is defined by company (case-insensitive) and role (case-insensitive).
+     * Identity is defined by company (case-insensitive), role (case-insensitive), and application date.
      */
     public boolean isSameApplication(Application otherApplication) {
         if (otherApplication == this) {

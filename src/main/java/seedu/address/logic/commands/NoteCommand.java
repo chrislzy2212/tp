@@ -37,7 +37,7 @@ public class NoteCommand extends Command {
 
     /**
      * @param targetIndex of the application in the filtered application list to update the note
-     * @param note of the application to be updated to
+     * @param note the note to update the application with
      */
     public NoteCommand(Index targetIndex, Note note) {
         requireNonNull(targetIndex);

@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applications whose company names, roles, "
-            + "application dates, urls or statuses contain any of the specified keywords (case-insensitive).\n"
+            + "application dates, URLs, or statuses contain any of the specified keywords (case-insensitive).\n"
             + "Matching applications are displayed as a list with index numbers.\n"
             + "Parameters: [c/COMPANY_NAME] [r/ROLE] [d/APPLICATION_DATE] or [d/START_DATE:END_DATE] [u/URL] "
             + "[s/STATUS]...\n"

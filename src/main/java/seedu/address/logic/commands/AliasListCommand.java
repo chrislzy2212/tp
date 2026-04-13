@@ -19,7 +19,7 @@ public class AliasListCommand extends Command {
             + ": Lists all saved aliases.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_NO_ALIASES = "You have no alias saved.";
+    public static final String MESSAGE_NO_ALIASES = "You have no aliases saved.";
     public static final String MESSAGE_HEADER = "Current aliases:\n";
 
     /**
