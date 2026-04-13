@@ -245,17 +245,18 @@ Design note: The command requires a URL to be present; applications without a UR
 
 ### Find feature (`find`)
 
-`find` filters the displayed application list using one or more of the following prefixes: `n/COMPANY`, `r/ROLE`, `d/DATE`, `s/STATUS`. At least one prefix must be provided.
+`find` filters the displayed application list using one or more of the following prefixes: `n/COMPANY`, `r/ROLE`, `d/DATE_OR_DATE_RANGE`, `u/URL`, `s/STATUS`. At least one prefix must be provided.
 
 Implementation flow:
 
 1. `FindCommandParser` tokenizes the input using `ArgumentTokenizer`, validates that at least one recognized prefix is present, and rejects invalid `Status` values early.
-1. It constructs an `ApplicationContainsKeywordsPredicate` with separate keyword lists per field.
+1. It constructs an `ApplicationContainsKeywordsPredicate` with separate keyword lists per field (including parsing exact dates and date ranges).
 1. `FindCommand` calls `Model#updateFilteredApplicationList(predicate)` to apply the filter.
 
 Predicate logic (`ApplicationContainsKeywordsPredicate`):
 * Keywords within the same field are matched with **OR** logic (any keyword match passes).
 * Different fields are combined with **AND** logic (all provided fields must match).
+* For dates, an application must fall exactly on the given date, or inclusively within the provided date range (`START_DATE:END_DATE`).
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions inside Logic and Model for find command" />
 
@@ -983,7 +984,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `find abc`  
        Expected: No applications are filtered. Error details are shown in the status message.
 
-    6. Other incorrect find commands to try: `find`, `find n/`, `find d/2025-12-12`, `find x/Google`  
+    6. Other incorrect find commands to try: `find`, `find n/`, `find x/Google`  
        Expected: Similar to previous.
 
 2. Finding applications after only some applications are being shown
@@ -998,6 +999,9 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `find n/Google Meta`  
        Expected: All applications in the data with company names matching either `Google` or `Meta` are shown, including applications that were not shown before the command was entered.
+
+    5. Test case: `find u/https://www.google.com/`  
+       Expected: All applications in the data with URLs matching `careers.google.com` are shown, including applications that were not shown before the command was entered.
    
 ### Editing an application
 
